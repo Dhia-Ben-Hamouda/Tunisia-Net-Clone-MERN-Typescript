@@ -31,6 +31,42 @@
             flex-direction: column;
             border-radius: 10px;
 
+            a{
+                text-align: end;
+                font-size: .8rem;
+                font-weight: 500;
+                color:$text;
+            }
+
+            h3{
+                font-weight: 500;
+                margin:0 auto;
+                font-size: .9rem;
+                color: $text;
+
+                span{
+                    color:$secondary;
+                    cursor: pointer;
+                }
+            }
+
+            .picture-wrapper{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img , .avatar{
+                    width:85px;
+                    height:85px;
+                    cursor: pointer;
+                    border-radius: 50%;
+                }
+
+                .avatar{
+                    color: $secondary;
+                }
+            }
+
             .eye{
                 width:1.5rem;
                 height:1.5rem;

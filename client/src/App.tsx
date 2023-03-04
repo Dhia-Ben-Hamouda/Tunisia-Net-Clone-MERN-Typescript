@@ -8,6 +8,7 @@ import Keyboards from "./pages/Keyboards";
 import Screens from "./pages/Screens";
 import Mouses from "./pages/Mouses";
 import ForgetPassword from "./pages/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 export default function(){
     return(
@@ -21,6 +22,7 @@ export default function(){
                 <Route path="/screens" element={ <Screens/> } />
                 <Route path="/mouses" element={ <Mouses/> } />
                 <Route path="/forgetPassword" element={ <ForgetPassword/> } />
+                <Route path="/resetPassword/:id" element={ <ResetPassword/> } />
             </Routes>
         </>
     )
