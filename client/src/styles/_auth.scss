@@ -1,51 +1,57 @@
 #auth{
-    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
 
-    form{
-        background:white;
+    .left-section{
+        background:$secondary;
+        min-height: 100vh;
+        width:50%;
         display: flex;
-        flex-direction: column;
-        width:400px;
-        padding:1rem;
-        gap:.5rem;
-        box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        justify-content: center;
+        align-items: center;
 
-        a{
-            text-align: end;
-            color:#777;
-            font-size: .85rem;
-        }
-
-        h3{
-            margin: 0 auto;
-            font-size: 1rem;
-            font-weight: 500;
-            color:#777;
-
-            span{
-                color:$primary;
-                cursor: pointer;
-            }
+        img{
+            width:300px;
         }
     }
-}
 
-#forget-password{
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    form{
-        background:white;
+    .right-section{
+        min-height:100vh;
+        width: 50%;
         display: flex;
-        flex-direction: column;
-        gap:.5rem;
-        width:400px;
-        padding:1rem;
-        box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        justify-content: center;
+        align-items: center;
+
+        form{
+            width: 400px;
+            padding:1rem;
+            gap:.5rem;
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+            background:white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+
+            .eye{
+                width:1.5rem;
+                height:1.5rem;
+                color:$text;
+                cursor: pointer;
+            }
+
+            button{
+                padding:1rem;
+                background:$secondary;
+                color:white;
+                border:none;
+                outline:none;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: .5s;
+
+                &:hover{
+                    transform: scale(1.03);
+                }
+            }
+        }
     }
 }

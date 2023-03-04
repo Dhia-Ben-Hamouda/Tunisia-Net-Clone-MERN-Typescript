@@ -2,31 +2,27 @@ import React from "react";
 import ReactDom from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import store from "./app/store";
 import { createTheme, ThemeProvider } from "@mui/material";
+import store from "./app/store";
 import "./styles/index.scss";
 import App from "./App";
 
 const root = ReactDom.createRoot(document.getElementById("root")!);
 const theme = createTheme({
-    palette:{
-        primary:{
-            main:"#FCC312"
+    palette: {
+        primary: {
+            main: "#3490CF"
         }
     }
 })
-const client = new QueryClient();
 
 root.render(
-    <QueryClientProvider client={client}>
-        <Router>
-            <ThemeProvider theme={theme}>
-                <Provider store={store}>
-                    <App />
-                </Provider>
-            </ThemeProvider>
-        </Router>
-    </QueryClientProvider>
+    <Router>
+        <ThemeProvider theme={theme}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </ThemeProvider>
+    </Router>
 )
 

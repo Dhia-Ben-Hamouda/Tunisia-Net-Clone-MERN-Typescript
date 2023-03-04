@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 $primary:#FCC312;
-$secondary:#1E90FF;
+$secondary:#3490CF;
+$text:#777;
 
 *{
     margin:0px;
@@ -20,6 +21,5 @@ body{
 @import "./navbar";
 @import "./home";
 @import "./auth";
-@import "./button";
-@import "./localbootstrap";
+@import "./carousel";
 @import "./computers";

@@ -9,7 +9,7 @@ export default function () {
     return (
         <>
             <div className="local-bootstrap">
-                <Carousell interval={3000}>
+                <Carousell interval={2000}>
                     <Carousell.Item>
                         <img
                             className="d-block w-100"
