@@ -1,0 +1,51 @@
+#auth{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form{
+        background:white;
+        display: flex;
+        flex-direction: column;
+        width:400px;
+        padding:1rem;
+        gap:.5rem;
+        box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+
+        a{
+            text-align: end;
+            color:#777;
+            font-size: .85rem;
+        }
+
+        h3{
+            margin: 0 auto;
+            font-size: 1rem;
+            font-weight: 500;
+            color:#777;
+
+            span{
+                color:$primary;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+#forget-password{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form{
+        background:white;
+        display: flex;
+        flex-direction: column;
+        gap:.5rem;
+        width:400px;
+        padding:1rem;
+        box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    }
+}

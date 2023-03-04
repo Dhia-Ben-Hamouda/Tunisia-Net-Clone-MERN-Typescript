@@ -1,0 +1,28 @@
+#computers{
+    min-height: calc(100vh - 81px);
+    padding:1rem 5vw;
+
+    .wrapper{
+        display: flex;
+        gap:1rem;
+
+        .desktop-filters{
+            background:white;
+            width:30%;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+
+            .header{
+                background:$primary;
+                padding:1rem;
+                color:white;
+            }
+        }
+
+        .products{
+            background:white;
+            padding:1rem;
+            width:70%;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+    }
+}
