@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import nodemailer from "nodemailer";
 import User from "../models/User.js";
 
 export async function signIn(req, res) {
@@ -8,9 +9,9 @@ export async function signIn(req, res) {
         const exist = await User.findOne({ email });
 
         if (exist) {
-            if(!exist.verified){
+            if (!exist.verified) {
                 return res.status(401).json({
-                    msg:"user is not verified"
+                    msg: "user is not verified"
                 })
             }
 
@@ -53,28 +54,28 @@ export async function signIn(req, res) {
 
 export async function signUp(req, res) {
     try {
-        const { name , phone , email , password , picture } = req.body;
+        const { name, phone, email, password, picture } = req.body;
 
-        const exist = await User.findOne({email});
+        const exist = await User.findOne({ email });
 
-        if(exist){
+        if (exist) {
             return res.status(400).json({
-                msg:"user with the given email already exists"
+                msg: "user with the given email already exists"
             })
-        }else{
+        } else {
             const salt = await bcrypt.genSalt();
-            const hashedPassword = await bcrypt.hash(password , salt);
+            const hashedPassword = await bcrypt.hash(password, salt);
 
             await User.create({
                 name,
                 phone,
                 email,
-                password:hashedPassword,
+                password: hashedPassword,
                 picture
             })
 
             return res.status(200).json({
-                msg:"user has been created succcessfully"
+                msg: "user has been created succcessfully"
             })
         }
     } catch (err) {
@@ -86,17 +87,55 @@ export async function signUp(req, res) {
 
 export async function forgetPassword(req, res) {
     try {
+        const { email } = req.body;
+        const exist = await User.findOne({ email });
+
+        if (!exist) {
+            return res.status(404).json({
+                msg: "user with the given email doesn't exist"
+            })
+        }
+
+        const link = `http://localhost:5000/resetPassword/${exist._id}`;
+
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "tunisianetclone@gmail.com",
+                pass: "fqfdacdxyfrupmhr"
+            }
+        })
+
+        var mailOptions = {
+            from: "tunisianetclone@gmail.com",
+            to: email,
+            subject: "Password Reset Email",
+            text: `you can reset your password by clicking on the following link : ${link}`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                return res.status(200).json({
+                    msg:"error while sending password reset email"
+                })
+            } else {
+                return res.status(200).json({
+                    msg:"a password reset link has been sent to your email"
+                })
+            }
+        });
+
 
     } catch (err) {
         return res.status(400).json({
-            msg: "error while sending verification email"
+            msg: "error while sending password reset email"
         })
     }
 }
 
 export async function resetPassword(req, res) {
     try {
-
+        
     } catch (err) {
         return res.status(400).json({
             msg: "error while resetting password"

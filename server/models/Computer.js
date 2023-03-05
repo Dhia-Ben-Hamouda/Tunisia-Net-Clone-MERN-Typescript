@@ -25,6 +25,26 @@ const computerSchema = new mongoose.Schema({
     pictures:{
         type:[String],
         required:true
+    },
+    brand:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    procesor:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    memory:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    graphicsCard:{
+        type:String,
+        required:true,
+        trim:true
     }
 })
 

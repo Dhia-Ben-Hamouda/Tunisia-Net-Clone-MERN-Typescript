@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
+import computerRoutes from "./routes/computerRoutes.js";
 
 const app = express();
 
@@ -35,3 +36,4 @@ app.listen(port , ()=>{
 // handle routes
 
 app.use("/auth" , authRoutes);
+app.use("/computers" , computerRoutes);
