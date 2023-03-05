@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import DesktopFilter from "../components/computers/ComputerFilters";
+import DesktopFilter from "../components/computers/DesktopFilter";
 
 export default function(){
     return(

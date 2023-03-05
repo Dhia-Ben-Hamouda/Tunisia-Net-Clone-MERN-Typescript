@@ -48,22 +48,26 @@ export default function () {
 
         switch (data.msg) {
             case "user with the given email doesn't exist":
-                toast.error("user with the given email doesn't exist", {
+                toast.error(data.msg , {
                     autoClose: 5000,
                     pauseOnHover: false,
                 })
                 break;
             case "wrong password":
-                toast.error("wrong password", {
-                    autoClose: 5000,
+                toast.error(data.msg , {
+                    autoClose: 6000,
                     pauseOnHover: false,
+                    pauseOnFocusLoss:false
                 })
                 break;
             case "logged in successfully":
                 break;
-            case "user is not verified":
-                break;
             case "error while signing in":
+                toast.error(data.msg , {
+                    autoClose: 6000,
+                    pauseOnHover: false,
+                    pauseOnFocusLoss:false
+                })
                 break;
             default:
                 break;
@@ -91,22 +95,18 @@ export default function () {
         console.log(data);
 
         switch (data.msg) {
-            case "user with the given email already exists":
-                toast.error("user with the given email already exists", {
-                    autoClose: 5000,
+            case "password has been reset successfully":
+                toast.success(data.msg , {
+                    autoClose: 6000,
                     pauseOnHover: false,
-                })
-                break;
-            case "user has been created succcessfully":
-                toast.success("user has been created succcessfully", {
-                    autoClose: 5000,
-                    pauseOnHover: false,
+                    pauseOnFocusLoss:false
                 })
                 break;
             case "error while signing up":
                 toast.error("error while signing up", {
-                    autoClose: 5000,
+                    autoClose: 6000,
                     pauseOnHover: false,
+                    pauseOnFocusLoss:false
                 })
                 break;
             default:

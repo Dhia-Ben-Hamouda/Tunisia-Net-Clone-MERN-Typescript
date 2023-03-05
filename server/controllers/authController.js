@@ -9,12 +9,6 @@ export async function signIn(req, res) {
         const exist = await User.findOne({ email });
 
         if (exist) {
-            if (!exist.verified) {
-                return res.status(401).json({
-                    msg: "user is not verified"
-                })
-            }
-
             const match = await bcrypt.compare(password, exist.password);
 
             if (match) {
@@ -96,7 +90,7 @@ export async function forgetPassword(req, res) {
             })
         }
 
-        const link = `http://localhost:5000/resetPassword/${exist._id}`;
+        const link = `http://localhost:5000/auth/resetPassword/${exist._id}`;
 
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -135,7 +129,17 @@ export async function forgetPassword(req, res) {
 
 export async function resetPassword(req, res) {
     try {
-        
+        const { password } = req.body;
+        const { id } = req.params;
+
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password , salt);
+
+        await User.findByIdAndUpdate(id , { password: hashedPassword });
+
+        return res.status(200).json({
+            msg:"password has been reset successfully"
+        })
     } catch (err) {
         return res.status(400).json({
             msg: "error while resetting password"
