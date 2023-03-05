@@ -31,6 +31,40 @@
             flex-direction: column;
             border-radius: 10px;
 
+            .socials-wrapper{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap:1.25rem;
+
+                .social{
+                    cursor: pointer;
+                }
+            }
+
+            .or{
+                position: relative;
+                margin-bottom: .5rem;
+
+                &::before , &::after{
+                    content:"";
+                    position: absolute;
+                    width:25px;
+                    height:3px;
+                    border-radius: 50px;
+                    background:$text;
+                    top:50%;
+                }
+
+                &::before{
+                    left:-35px;
+                }
+
+                &::after{
+                    right:-35px;
+                }
+            }
+
             a{
                 text-align: end;
                 font-size: .8rem;
@@ -90,4 +124,8 @@
             }
         }
     }
+}
+
+.Toastify__toast{
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.1) !important;
 }
