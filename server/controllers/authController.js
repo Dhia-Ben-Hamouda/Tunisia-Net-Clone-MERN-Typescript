@@ -90,7 +90,7 @@ export async function forgetPassword(req, res) {
             })
         }
 
-        const link = `http://localhost:5000/auth/resetPassword/${exist._id}`;
+        const link = `https://tunisia-net-clone.vercel.app/auth/resetPassword/${exist._id}`;
 
         const transporter = nodemailer.createTransport({
             service: "gmail",

@@ -43,12 +43,20 @@ const computerSchema = new mongoose.Schema({
     memory: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        enum: ["8 gb", "16 gb", "24 gb", "32 gb"]
+    },
+    storage:{
+        type:String,
+        required:true,
+        trim:true,
+        enum:["1TB + 256GB SSD" , "1TB SSD" , "512GB SSD"]
     },
     graphicsCard: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        enum:["GTX 1650" , "RTX 3050" , "RTX 3050 ti"]
     }
 })
 

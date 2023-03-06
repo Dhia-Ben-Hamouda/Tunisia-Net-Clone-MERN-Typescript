@@ -12,6 +12,17 @@ export async function getPaginatedComputers(req,res){
     }
 }
 
+export async function getAllComputers(req,res){
+    try{
+        const computers = await Computer.find();
+        return res.status(200).json(computers);
+    }catch(err){
+        return res.status(400).json({
+            msg:"error while fetching computers"
+        })
+    }
+}
+
 export async function getComputer(req,res){
     try{
         const { id } = req.params;

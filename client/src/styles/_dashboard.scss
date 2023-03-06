@@ -36,6 +36,20 @@
             gap:.5rem;
             box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
             border-radius: 10px;
+
+            &>div{
+                display: flex;
+                width: 100%;
+                gap:.5rem;
+
+                &>*{
+                    width: 50%;
+                }
+
+                &>*:first-of-type , &>*:last-of-type{
+                    width:100% !important;
+                }
+            }
     
             button{
                 background:$secondary;
