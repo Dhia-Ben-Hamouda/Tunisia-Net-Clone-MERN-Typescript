@@ -20,7 +20,8 @@ const keyboardSchema = new mongoose.Schema({
                 type:mongoose.Schema.Types.ObjectId,
                 ref:"comments"
             }
-        ]
+        ],
+        default:[]
     },
     pictures:{
         type:[String],
