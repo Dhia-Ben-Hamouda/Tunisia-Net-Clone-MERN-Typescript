@@ -11,6 +11,7 @@ import ForgetPassword from "./components/auth/ForgetPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import AuthForm from "./components/auth/AuthForm";
 import DashboardPage from "./pages/DashboardPage";
+import TopButton from "./components/TopButton";
 
 export default function () {
     return (
@@ -27,8 +28,9 @@ export default function () {
                 <Route path="/keyboards" element={<KeyboardsPage />} />
                 <Route path="/screens" element={<ScreensPage />} />
                 <Route path="/mouses" element={<MousesPage />} />
-                <Route path="/dashboard" element={<DashboardPage/>} />
+                <Route path="/dashboard" element={<DashboardPage />} />
             </Routes>
+            <TopButton />
         </>
     )
 }

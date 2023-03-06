@@ -13,6 +13,15 @@ const theme = createTheme({
         primary: {
             main: "#3490CF"
         }
+    },
+    components: {
+        MuiSlider: {
+            styleOverrides: {
+                thumb: {
+                    color: "#fff"
+                }
+            }
+        }
     }
 })
 

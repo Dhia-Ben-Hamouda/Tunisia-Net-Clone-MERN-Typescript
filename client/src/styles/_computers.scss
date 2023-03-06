@@ -1,85 +1,168 @@
-#computers{
+#computers {
     min-height: calc(100vh - 81px);
-    padding:1rem 5vw;
+    padding: 1rem 5vw;
 
-    .wrapper{
+    .pagination {
+        margin-top: 1rem;
         display: flex;
-        gap:1rem;
+        justify-content: flex-end;
 
-        .desktop-filters{
-            background:white;
-            width:30%;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin-left: .5rem;
+            color: white;
+            background: $text;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: .5s;
 
-            .header{
-                background:$primary;
-                padding:1rem;
-                color:white;
+            &:hover {
+                background: $primary;
             }
         }
 
-        .products{
-            width:70%;
+        .active {
+            background: $primary
+        }
+    }
+
+    .wrapper {
+        display: flex;
+        gap: 1rem;
+
+        .desktop-filters {
+            background: white;
+            width: 30%;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+
+            .header {
+                background: $primary;
+                padding: 1rem;
+                color: white;
+            }
+
+            .wrapper{
+                display: flex;
+                flex-direction: column;
+                padding:2rem;
+
+                h1{
+                    color:$text;
+                }
+
+            }
+        }
+
+        .products {
+            width: 70%;
             display: grid;
-            grid-template-columns: repeat(1 , 1fr);
-            gap:1rem;
-            
-            .product{
-                background:white;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+
+            .product {
+                background: white;
                 display: flex;
                 align-items: center;
-                box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-                padding:1rem;
-                gap:1.25rem;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 1rem;
+                padding-bottom:.75rem;
+                gap: 1.5rem;
+                border-radius: 5px;
 
-                .left{
-                    width:20%;
+                .left {
+                    width: 25%;
 
-                    a{
+                    a {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        
-                        img{
+
+                        img {
                             width: 90%;
                         }
                     }
                 }
 
-                .middle{
-                    width:60%;
+                .middle {
+                    width: 75%;
                     display: flex;
                     flex-direction: column;
-                    gap:.5rem;
+                    gap: .5rem;
 
-                    .name{
-                        color:$secondary;
+                    .name {
+                        color: $secondary;
                         font-weight: 600;
                         font-size: .9rem;
                     }
 
-                    .description{
+                    .description {
                         color: $text;
                         line-height: 1.8rem;
                         font-size: .8rem;
                     }
 
-                    .stars{
+                    .container{
                         display: flex;
+                        justify-content: space-between;
                         align-items: center;
-                        gap:.25rem;
 
-                        p{
-                            font-size: .8rem;
-                            color:$text;
+                        .wrapper{
+                            display: flex;
+                            flex-direction: column;
+
+                            .stars {
+                                display: flex;
+                                align-items: center;
+                                gap: .25rem;
+        
+                                p {
+                                    font-size: .8rem;
+                                    margin-top: .1rem;
+                                    font-weight: 500;
+                                    color: $text;
+                                }
+        
+                                .star {
+                                    color: $primary;
+                                    width: 1.5rem;
+                                    height: 1.5rem;
+                                }
+    
+                            }
+                            
+                            .price{
+                                color:red;
+                                font-weight: 600;
+                                margin-top: .1rem;
+                                margin-left: .25rem;
+                            }
                         }
 
-                        .star{
-                            color:$primary;
-                            width:1.5rem;
-                            height:1.5rem;
+                        button{
+                            background:$primary;
+                            border:none;
+                            outline:none;
+                            color:white;
+                            padding:.5rem .75rem;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            transition: .5s;
+
+                            &:hover{
+                                transform:scale(1.08);
+                            }
                         }
+
                     }
+
                 }
 
 
