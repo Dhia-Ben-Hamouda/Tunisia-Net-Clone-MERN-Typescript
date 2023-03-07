@@ -1,22 +1,9 @@
 #auth{
     display: flex;
-
-    .left-section{
-        background:$secondary;
-        min-height: 100vh;
-        width:50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        img{
-            width:300px;
-        }
-    }
-
+    justify-content: center;
+    
     .right-section{
         min-height:100vh;
-        width: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -79,7 +66,7 @@
                 color: $text;
 
                 span{
-                    color:$secondary;
+                    color:$primary;
                     cursor: pointer;
                 }
             }
@@ -97,7 +84,7 @@
                 }
 
                 .avatar{
-                    color: $secondary;
+                    color: $primary;
                 }
             }
 
@@ -110,7 +97,7 @@
 
             button{
                 padding:1rem;
-                background:$secondary;
+                background:$primary;
                 color:white;
                 border:none;
                 outline:none;

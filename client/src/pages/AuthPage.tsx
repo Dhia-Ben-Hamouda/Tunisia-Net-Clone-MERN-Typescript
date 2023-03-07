@@ -6,9 +6,6 @@ export default function () {
     return (
         <>
             <section id="auth">
-                <div className="left-section">
-                    <img src={logo} alt="" />
-                </div>
                 <Outlet />
             </section>
         </>

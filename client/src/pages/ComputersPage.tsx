@@ -6,7 +6,7 @@ import Pagination from "../components/Pagination";
 
 export default function () {
     const [page, setPage] = useState(1);
-    const [numOfPages, setNumOfPages] = useState(1);
+    const [numOfPages, setNumOfPages] = useState(5);
     const [priceRange, setPriceRange] = useState([0, 5000]);
     const [params, setParams] = useState({
         page,

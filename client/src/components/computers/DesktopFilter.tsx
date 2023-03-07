@@ -26,18 +26,19 @@ export default function ({ priceRange, setPriceRange }: any) {
                                 max={4000}
                                 value={priceRange}
                                 valueLabelDisplay="auto"
+                                onChange={(e,newValue) => { setPriceRange(newValue) }}
                                 onChangeCommitted={(e, newValue) => { setPriceRange(newValue) }}
                             />
                         </div>
                         <div className="price-inputs">
                             <input
                                 className="min"
-                                value={priceRange[0] + "  DT"}
-                                onChange={() => { }}
+                                value={priceRange[0]}
+                                onChange={(e) => { setPriceRange([e.target.value , priceRange[1]]) }}
                             />
                             <input
                                 className="max"
-                                value={priceRange[1] + "  DT"}
+                                value={priceRange[1]}
                                 onChange={() => { }} />
                         </div>
                     </div>
