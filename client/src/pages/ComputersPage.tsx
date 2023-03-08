@@ -3,15 +3,23 @@ import Navbar from "../components/Navbar";
 import DesktopFilter from "../components/computers/DesktopFilter";
 import Product from "../components/Product";
 import Pagination from "../components/Pagination";
+import { useEffect } from "react";
 
 export default function () {
-    const [page, setPage] = useState(1);
-    const [numOfPages, setNumOfPages] = useState(5);
-    const [priceRange, setPriceRange] = useState([0, 5000]);
     const [params, setParams] = useState({
-        page,
-        priceRange
+        page:1,
+        numberOfPages:1,
+        price:[0,4000],
+        brand:[],
+        procesor:[],
+        storage:[],
+        memory:[],
+        graphicsCard:[]
     })
+
+    useEffect(()=>{
+        console.log(params);
+    } , [params]);
 
     return (
         <>
@@ -19,8 +27,8 @@ export default function () {
             <section id="computers">
                 <div className="wrapper">
                     <DesktopFilter
-                        priceRange={priceRange}
-                        setPriceRange={setPriceRange}
+                        params={params}
+                        setParams={setParams}
                     />
                     <div className="products">
                         <Product />
@@ -32,11 +40,11 @@ export default function () {
                     </div>
                 </div>
                 <div className="pagination">
-                    <Pagination
+                    {/* <Pagination
                         page={page}
                         pages={numOfPages}
                         setPage={setPage}
-                    />
+                    /> */}
                 </div>
             </section>
         </>

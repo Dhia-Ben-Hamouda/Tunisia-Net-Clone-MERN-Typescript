@@ -51,6 +51,7 @@
                 .slider {
                   display: flex;
                   width: 70%;
+                  padding-left:1rem;
           
                   .s{
                     color:$primary !important;
@@ -78,6 +79,7 @@
                   display: flex;
                   justify-content: flex-start;
                   margin-top: 0px;
+                  padding-left:1rem;
           
                   input {
                     width: 80px;
@@ -103,6 +105,10 @@
                 display: flex;
                 flex-direction: column;
                 padding:2rem;
+
+                .group{
+                    padding-left:1rem;
+                }
 
                 h1{
                     color:$text;

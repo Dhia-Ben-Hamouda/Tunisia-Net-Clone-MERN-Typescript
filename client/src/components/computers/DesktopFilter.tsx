@@ -1,8 +1,10 @@
 import React from "react";
 import { Checkbox, Slider } from "@mui/material";
 import { FormControlLabel, FormGroup } from "@mui/material";
+import { useState } from "react";
 
-export default function ({ priceRange, setPriceRange }: any) {
+export default function ({ params, setParams }: any) {
+    const [priceRange, setPriceRange] = useState<any>([0, 4000]);
 
     function handleFilters() {
 
@@ -26,25 +28,26 @@ export default function ({ priceRange, setPriceRange }: any) {
                                 max={4000}
                                 value={priceRange}
                                 valueLabelDisplay="auto"
-                                onChange={(e,newValue) => { setPriceRange(newValue) }}
-                                onChangeCommitted={(e, newValue) => { setPriceRange(newValue) }}
+                                onChange={(e, newValue) => { setPriceRange(newValue) }}
+                                onChangeCommitted={(e, newValue) => { setParams({ ...params, price: newValue }) }}
                             />
                         </div>
                         <div className="price-inputs">
                             <input
                                 className="min"
                                 value={priceRange[0]}
-                                onChange={(e) => { setPriceRange([e.target.value , priceRange[1]]) }}
+                                onChange={(e) => { setPriceRange([e.target.value, priceRange[1]]) }}
                             />
                             <input
                                 className="max"
                                 value={priceRange[1]}
-                                onChange={() => { }} />
+                                onChange={(e) => { setPriceRange([priceRange[0], e.target.value]) }}
+                            />
                         </div>
                     </div>
                     <div className="brand">
                         <h1>Brand</h1>
-                        <FormGroup>
+                        <FormGroup className="group">
                             <FormControlLabel
                                 control={<Checkbox name="brand" value="HP" onChange={handleFilters} />}
                                 label="HP"
@@ -61,7 +64,7 @@ export default function ({ priceRange, setPriceRange }: any) {
                     </div>
                     <div className="procesor">
                         <h1>Procesor</h1>
-                        <FormGroup>
+                        <FormGroup className="group">
                             <FormControlLabel
                                 control={<Checkbox name="procesor" value="ryzen5" onChange={handleFilters} />}
                                 label="AMD Ryzen 5"
@@ -82,7 +85,7 @@ export default function ({ priceRange, setPriceRange }: any) {
                     </div>
                     <div className="memory">
                         <h1>Memory</h1>
-                        <FormGroup>
+                        <FormGroup className="group">
                             <FormControlLabel
                                 control={<Checkbox name="memory" value="8gb" onChange={handleFilters} />}
                                 label="8 gb"
@@ -99,7 +102,7 @@ export default function ({ priceRange, setPriceRange }: any) {
                     </div>
                     <div className="drive">
                         <h1>Drive</h1>
-                        <FormGroup>
+                        <FormGroup className="group">
                             <FormControlLabel
                                 control={<Checkbox name="drive" value="1hdd+256ssd" onChange={handleFilters} />}
                                 label="1TB + 256GB SSD"
@@ -116,7 +119,7 @@ export default function ({ priceRange, setPriceRange }: any) {
                     </div>
                     <div className="graphicsCard">
                         <h1>Graphics Card</h1>
-                        <FormGroup>
+                        <FormGroup className="group">
                             <FormControlLabel
                                 control={<Checkbox name="graphicsCard" value="gtx1650" onChange={handleFilters} />}
                                 label="GTX 1650"
