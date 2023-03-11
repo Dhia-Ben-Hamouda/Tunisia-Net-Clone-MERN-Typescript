@@ -10,15 +10,6 @@ const commentSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
-    creator:{
-        type:String,
-        required:true,
-        trim:true
-    },
-    picture:{
-        type:String,
-        required:true,
-    },
     commenter:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"users"

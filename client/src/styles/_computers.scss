@@ -51,7 +51,7 @@
                 .slider {
                   display: flex;
                   width: 70%;
-                  padding-left:1rem;
+                  padding-left:.5rem;
           
                   .s{
                     color:$primary !important;
@@ -79,7 +79,7 @@
                   display: flex;
                   justify-content: flex-start;
                   margin-top: 0px;
-                  padding-left:1rem;
+                  padding-left:.5rem;
           
                   input {
                     width: 80px;
@@ -107,7 +107,7 @@
                 padding:2rem;
 
                 .group{
-                    padding-left:1rem;
+                    padding-left:.5rem;
                 }
 
                 h1{
@@ -148,10 +148,11 @@
                     }
                 }
 
-                .middle {
+                .right {
                     width: 75%;
                     display: flex;
                     flex-direction: column;
+                    justify-content:space-between;
                     gap: .5rem;
 
                     .name {
