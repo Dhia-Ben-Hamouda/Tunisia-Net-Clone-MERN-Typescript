@@ -8,6 +8,9 @@ export default function () {
     const [current, setCurrent] = useState("computers");
     const [products, setProducts] = useState([]);
 
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [pictures, setPictures] = useState<string[]>([]);
     const [brand, setBrand] = useState("");
     const [procesor, setProcesor] = useState("");
     const [memory, setMemory] = useState("");
@@ -24,13 +27,43 @@ export default function () {
         fetchData();
     }, [current]);
 
-    function fileHandler(e: any){
-        const files = e.target.files;
-        for(let key in files){
-            if(files.hasOwnProperty(key)){
-                console.log(files[key]);
+    function fileHandler(e: any) {
+        let files = e.target.files;
+
+        for (let i = 0; i < files.length; i++) {
+            let reader: any = new FileReader();
+            let file = files[i];
+            reader.onload = () => {
+                const arr = pictures;
+                arr.push(reader.result);
+                setPictures(arr);
             }
+            reader.readAsDataURL(file)
         }
+    }
+
+    async function submitHandler(e: React.FormEvent){
+        e.preventDefault();
+
+        const response = await fetch(`${url}/computers/insertComputer` , {
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body: JSON.stringify({
+                name,
+                description,
+                pictures,
+                brand,
+                procesor,
+                graphicsCard,
+                memory,
+                storage
+            })
+        })
+        const data = await response.json();
+
+        console.log(data);
     }
 
     return (
@@ -51,11 +84,19 @@ export default function () {
                 </div>
                 <div className="wrapper">
                     <div className="products">
-
+                        {
+                            products.map((item: any,index)=>{
+                                return(
+                                    <div key={index} >
+                                        {item.name}
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
-                    <form autoComplete="off" >
-                        <TextField label="name" />
-                        <TextField label="description"  />
+                    <form autoComplete="off" onSubmit={submitHandler} >
+                        <TextField value={name} onChange={e => setName(e.target.value)} label="name" />
+                        <TextField value={description} onChange={e => setDescription(e.target.value)} label="description" />
                         <div>
                             <TextField label="price" />
                             <TextField select label="brand" value={brand} onChange={e => setBrand(e.target.value)} >
@@ -94,7 +135,7 @@ export default function () {
                             </TextField>
                         </div>
                         <input type="file" multiple onChange={fileHandler} />
-                        <button>Insert products</button>
+                        <button type="submit" >Insert products</button>
                     </form>
                 </div>
             </section>

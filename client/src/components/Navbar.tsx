@@ -10,7 +10,7 @@ export default function () {
                 <Link to="/">
                     <img className="logo" src={logo} />
                 </Link>
-                <ul>
+                <ul className="desktop-list" >
                     <li>
                         <Link to="/computers">Computers</Link>
                     </li>

@@ -2,8 +2,9 @@ import Computer from "../models/Computer.js";
 
 export async function getPaginatedComputers(req,res){
     try{
-        const {  } = req.query.params;
+        const { page } = JSON.parse(req.query.params);
 
+        
 
     }catch(err){
         return res.status(400).json({

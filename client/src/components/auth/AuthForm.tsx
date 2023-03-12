@@ -115,7 +115,7 @@ export default function () {
     }
 
     return (
-        <div className="right-section">
+        <>
             <form onSubmit={signIn ? authenticate : register} autoComplete="off" >
                 {
                     !signIn && <>
@@ -162,6 +162,6 @@ export default function () {
                 }
             </form>
             <ToastContainer />
-        </div>
+        </>
     )
 }

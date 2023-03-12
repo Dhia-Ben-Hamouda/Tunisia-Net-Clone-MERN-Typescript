@@ -88,6 +88,7 @@ nav{
                 border:none;
                 outline:none;
                 font-weight: 500;
+                width:70%;
             }
         }
         
@@ -126,6 +127,22 @@ nav{
             height:2.25rem;
             width:2.25rem;
             cursor: pointer;
+        }
+    }
+}
+
+// mobile devices
+
+@media(max-width:680px){
+    nav{
+        .desktop-list{
+            display: none;
+        }
+
+        .container{
+            .search-container{
+                display: none;
+            }
         }
     }
 }

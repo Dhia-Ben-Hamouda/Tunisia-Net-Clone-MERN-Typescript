@@ -23,7 +23,7 @@ export default function () {
                             <FaStar className="star" />
                             <FaStar className="star" />
                             <FaStar className="star" />
-                            <p>( 4.7 )</p>
+                            <p>( not rated yet )</p>
                             <div className="price">2119.000 DT</div>
                         </div>
                     </div>

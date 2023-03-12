@@ -46,14 +46,12 @@ export default function () {
 
     return (
         <>
-            <div className="right-section">
-                <form onSubmit={submitHandler} autoComplete="off" >
-                    <TextField value={password} onChange={e => setPassword(e.target.value)} label="enter new password..." />
-                    <TextField value={confirm} onChange={e => setConfirm(e.target.value)} label="confirm passwor..." />
-                    <button>Reset password</button>
-                </form>
-                <ToastContainer />
-            </div>
+            <form onSubmit={submitHandler} autoComplete="off" >
+                <TextField value={password} onChange={e => setPassword(e.target.value)} label="enter new password..." />
+                <TextField value={confirm} onChange={e => setConfirm(e.target.value)} label="confirm passwor..." />
+                <button>Reset password</button>
+            </form>
+            <ToastContainer />
         </>
     )
 }

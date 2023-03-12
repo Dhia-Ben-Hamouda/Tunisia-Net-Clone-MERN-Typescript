@@ -16,3 +16,11 @@
         }
     }
 }
+
+// mobile devices
+
+@media(max-width:680px){
+    .add-grid{
+        grid-template-columns: repeat(2 , 1fr);
+    }
+}

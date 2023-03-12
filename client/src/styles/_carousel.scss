@@ -1,4 +1,18 @@
 .local-bootstrap {
-    padding:1rem 5vw 0rem; 
+    padding: 1rem 5vw 0rem;
     @import "node_modules/bootstrap/scss/bootstrap";
+}
+
+// mobile devices
+
+@media(max-width:680px) {
+    .local-bootstrap {
+        .carousel-indicators {
+            margin-bottom: 0rem !important;
+        }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon{
+            width:1rem;
+        }
+    }
 }
