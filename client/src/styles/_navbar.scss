@@ -135,6 +135,11 @@ nav{
 
 @media(max-width:680px){
     nav{
+
+        .logo{
+            width:125px;
+        }
+
         .desktop-list{
             display: none;
         }
@@ -142,6 +147,17 @@ nav{
         .container{
             .search-container{
                 display: none;
+            }
+
+            .cart{
+                .cart-icon{
+                    width:2.25rem !important;
+                    height:2.25rem !important;
+                }
+            }
+
+            .icon:not(.search){
+                width:1.75rem;
             }
         }
     }

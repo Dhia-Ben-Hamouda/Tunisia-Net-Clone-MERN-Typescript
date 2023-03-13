@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { url } from "../api/baseURL";
 import { TextField, MenuItem } from "@mui/material";
+import { Computer } from "../@types/types";
 
 const filters = ["computers", "keyboards", "mouses", "screens"];
 
@@ -16,6 +17,7 @@ export default function () {
     const [memory, setMemory] = useState("");
     const [storage, setStorage] = useState("");
     const [graphicsCard, setGraphicsCard] = useState("");
+    const [price , setPrice] = useState("");
 
     useEffect(() => {
         async function fetchData() {
@@ -58,7 +60,8 @@ export default function () {
                 procesor,
                 graphicsCard,
                 memory,
-                storage
+                storage,
+                price
             })
         })
         const data = await response.json();
@@ -85,10 +88,17 @@ export default function () {
                 <div className="wrapper">
                     <div className="products">
                         {
-                            products.map((item: any,index)=>{
+                            products.map(({name , description , price , brand , graphicsCard , _id , memory , pictures , procesor , reviews , storage}: Computer)=>{
                                 return(
-                                    <div key={index} >
-                                        {item.name}
+                                    <div className="product">
+                                        <img src={pictures[0]} alt="" />
+                                        <h1>{name}</h1>
+                                        <p>{description.slice(0 , 160)}...</p>
+                                        <h3>{price.toFixed(3)} DT</h3>
+                                        <div className="buttons">
+                                            <button>edit</button>
+                                            <button>delete</button>
+                                        </div>
                                     </div>
                                 )
                             })
@@ -98,7 +108,7 @@ export default function () {
                         <TextField value={name} onChange={e => setName(e.target.value)} label="name" />
                         <TextField value={description} onChange={e => setDescription(e.target.value)} label="description" />
                         <div>
-                            <TextField label="price" />
+                            <TextField value={price} onChange={e => setPrice(e.target.value)} label="price" />
                             <TextField select label="brand" value={brand} onChange={e => setBrand(e.target.value)} >
                                 <MenuItem value="HP" >HP</MenuItem>
                                 <MenuItem value="Asus" >Asus</MenuItem>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import DesktopFilter from "../components/computers/DesktopFilter";
-import Product from "../components/Product";
+import Product from "../components/computers/Computer";
 import Pagination from "../components/Pagination";
 import { useEffect } from "react";
 import { url } from "../api/baseURL";
@@ -26,7 +26,7 @@ export default function () {
                 const response = await fetch(`${url}/computers/getPaginatedComputers?params=${JSON.stringify(params)}`);
                 const data = await response.json();
 
-                console.log(data);
+                setComputers(data.computers);
             }catch(err){
                 console.error(err);
             }
@@ -44,12 +44,22 @@ export default function () {
                         setParams={setParams}
                     />
                     <div className="products">
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
-                        <Product />
+                        {
+                            computers.map(({name, _id: id, description, rating, pictures, price }: Computer) => {
+                                return(
+                                    <Product 
+                                        key={id}
+                                        id={id}
+                                        name={name}
+                                        description={description}
+                                        pictures={pictures}
+                                        price={price}
+                                        rating={rating}
+                                    />
+                                )
+                            })
+                        }
+                        
                     </div>
                 </div>
                 <div className="pagination">

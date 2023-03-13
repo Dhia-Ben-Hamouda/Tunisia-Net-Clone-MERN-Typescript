@@ -9,7 +9,7 @@ const app = express();
 
 // middleware
 
-app.use(express.json());
+app.use(express.json({limit:"1mb"}));
 mongoose.set('strictQuery', false);
 dotenv.config();
 app.use(cors({
