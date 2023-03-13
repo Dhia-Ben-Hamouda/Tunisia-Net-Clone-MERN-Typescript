@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import hp from "../images/hp.jpg";
 import { FaStar } from "react-icons/fa";
-import { Computer } from "../../@types/types";
+import { Mouse } from "../../@types/types";
 
-export default function ({ name, id, description, pictures, price, rating }: Computer) {
+export default function ({ name, id, description, pictures, price, rating }: Mouse) {
     return (
         <div className="product">
             <div className="left">

@@ -14,11 +14,16 @@ const screenSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    comments:{
+    rating:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    reviews:{
         type:[
             {
                 type:mongoose.Schema.Types.ObjectId,
-                ref:"comments"
+                ref:"reviews"
             }
         ],
         default:[]
@@ -38,7 +43,7 @@ const screenSchema = new mongoose.Schema({
         trim:true,
         enum:["21","24","27","32"]
     },
-    size:{
+    resolution:{
         type:String,
         required:true,
         trim:true,
