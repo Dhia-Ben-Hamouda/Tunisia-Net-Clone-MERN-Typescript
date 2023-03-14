@@ -22,7 +22,7 @@ export default function ({ params, setParams }: any) {
                         <div className="slider">
                             <Slider
                                 className="s"
-                                step={50}
+                                step={25}
                                 style={{ color: "#777", transform: "scale(.9)", marginBottom: ".75rem" }}
                                 min={0}
                                 max={300}
@@ -57,12 +57,16 @@ export default function ({ params, setParams }: any) {
                                 label="Asus"
                             />
                             <FormControlLabel
+                                control={<Checkbox name="brand" value="Redragon" onChange={handleFilters} />}
+                                label="Redragon"
+                            />
+                            <FormControlLabel
                                 control={<Checkbox name="brand" value="Dell" onChange={handleFilters} />}
                                 label="Dell"
                             />
                         </FormGroup>
                     </div>
-                    <div className="brand">
+                    <div className="mechanical">
                         <h1>Mechanical</h1>
                         <FormGroup className="group">
                             <FormControlLabel
@@ -75,7 +79,7 @@ export default function ({ params, setParams }: any) {
                             />
                         </FormGroup>
                     </div>
-                    <div className="brand">
+                    <div className="wireless">
                         <h1>Wireless</h1>
                         <FormGroup className="group">
                             <FormControlLabel

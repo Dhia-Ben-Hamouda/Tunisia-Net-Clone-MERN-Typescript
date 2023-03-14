@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import DesktopFilter from "../components/computers/DesktopFilter";
+import DesktopFilter from "../components/mouses/DesktopFilter";
 import Product from "../components/computers/Computer";
 import Pagination from "../components/Pagination";
 import { useEffect } from "react";
@@ -13,8 +13,8 @@ export default function () {
         page:1,
         numberOfPages:1,
         price:[0,4000],
-        brand:["HP", "Redragon", "Dell"],
-        wireless:["no","yes"]
+        brand:[],
+        wireless:[]
     })
 
     useEffect(()=>{

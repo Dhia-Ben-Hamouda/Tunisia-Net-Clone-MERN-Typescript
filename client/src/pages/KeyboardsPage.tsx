@@ -13,9 +13,9 @@ export default function () {
         page: 1,
         numberOfPages: 1,
         price: [0, 500],
-        brand: ["HP", "Redragon", "Dell"],
-        wireless: ["yes", "no"],
-        mechanical: ["yes", "no"]
+        brand: [],
+        wireless: [],
+        mechanical: []
     })
 
     useEffect(() => {

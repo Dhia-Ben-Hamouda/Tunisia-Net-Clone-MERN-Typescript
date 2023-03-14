@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import DesktopFilter from "../components/computers/DesktopFilter";
+import DesktopFilter from "../components/screens/DesktopFilter";
 import Product from "../components/computers/Computer";
 import Pagination from "../components/Pagination";
 import { useEffect } from "react";
@@ -13,9 +13,9 @@ export default function () {
         page:1,
         numberOfPages:1,
         price:[0,4000],
-        brand:["HP", "Asus", "Dell","Redragon"],
-        size:["21","24","27","32"],
-        resolution:["HD" , "Full HD" , "QHD" , "4K"]
+        brand:[],
+        size:[],
+        resolution:[]
     })
 
     useEffect(()=>{

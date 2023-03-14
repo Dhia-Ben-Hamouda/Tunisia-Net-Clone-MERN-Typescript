@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Provider as StoreProvider } from "react-redux";
 import { createTheme, ThemeProvider } from "@mui/material";
 import store from "./app/store";
 import "./styles/index.scss";
@@ -28,9 +28,9 @@ const theme = createTheme({
 root.render(
     <Router>
         <ThemeProvider theme={theme}>
-            <Provider store={store}>
+            <StoreProvider store={store}>
                 <App />
-            </Provider>
+            </StoreProvider>
         </ThemeProvider>
     </Router>
 )

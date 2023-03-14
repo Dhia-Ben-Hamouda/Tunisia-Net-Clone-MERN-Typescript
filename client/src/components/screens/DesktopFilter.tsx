@@ -3,11 +3,27 @@ import { Checkbox, Slider } from "@mui/material";
 import { FormControlLabel, FormGroup } from "@mui/material";
 import { useState } from "react";
 
+interface EventTarget {
+    name: string
+}
+
 export default function ({ params, setParams }: any) {
-    const [priceRange, setPriceRange] = useState<any>([0, 4000]);
+    const [priceRange, setPriceRange] = useState<any>([0, 2000]);
 
-    function handleFilters() {
+    function handleFilters(e: any) {
+        const name = e.target.name;
+        const value = e.target.value;
 
+        if (e.target.checked) {
+            let arr = params[name];
+            arr.push(value);
+            setParams({ ...params, [name]: arr });
+        }
+        else {
+            let arr = params[name];
+            arr = arr.filter((item: any) => item !== value);
+            setParams({ ...params, [name]: arr });
+        }
     }
 
     return (
@@ -25,7 +41,7 @@ export default function ({ params, setParams }: any) {
                                 step={200}
                                 style={{ color: "#777", transform: "scale(.9)", marginBottom: ".75rem" }}
                                 min={0}
-                                max={4000}
+                                max={2000}
                                 value={priceRange}
                                 valueLabelDisplay="auto"
                                 onChange={(e, newValue) => { setPriceRange(newValue) }}
@@ -57,83 +73,58 @@ export default function ({ params, setParams }: any) {
                                 label="Asus"
                             />
                             <FormControlLabel
+                                control={<Checkbox name="brand" value="Redragon" onChange={handleFilters} />}
+                                label="Redragon"
+                            />
+                            <FormControlLabel
                                 control={<Checkbox name="brand" value="Dell" onChange={handleFilters} />}
                                 label="Dell"
                             />
                         </FormGroup>
                     </div>
-                    <div className="procesor">
-                        <h1>Procesor</h1>
+                    <div className="size">
+                        <h1>Size</h1>
                         <FormGroup className="group">
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="ryzen5" onChange={handleFilters} />}
-                                label="AMD Ryzen 5"
+                                control={<Checkbox name="size" value="21" onChange={handleFilters} />}
+                                label="21'"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="i5" onChange={handleFilters} />}
-                                label="Intel Core i5"
+                                control={<Checkbox name="size" value="24" onChange={handleFilters} />}
+                                label="24'"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="ryzen7" onChange={handleFilters} />}
-                                label="AMD Ryzen 7"
+                                control={<Checkbox name="size" value="27" onChange={handleFilters} />}
+                                label="27'"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="i7" onChange={handleFilters} />}
-                                label="Intel Core i7"
+                                control={<Checkbox name="size" value="32" onChange={handleFilters} />}
+                                label="32'"
                             />
                         </FormGroup>
                     </div>
-                    <div className="memory">
-                        <h1>Memory</h1>
+                    <div className="resolution">
+                        <h1>Resolution</h1>
                         <FormGroup className="group">
                             <FormControlLabel
-                                control={<Checkbox name="memory" value="8gb" onChange={handleFilters} />}
-                                label="8 gb"
+                                control={<Checkbox name="resolution" value="HD" onChange={handleFilters} />}
+                                label="HD"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="memory" value="16gb" onChange={handleFilters} />}
-                                label="16 gb"
+                                control={<Checkbox name="resolution" value="Full HD" onChange={handleFilters} />}
+                                label="Full HD"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="memory" value="32gb" onChange={handleFilters} />}
-                                label="32 gb"
+                                control={<Checkbox name="resolution" value="QHD" onChange={handleFilters} />}
+                                label="QHD"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox name="resolution" value="4K" onChange={handleFilters} />}
+                                label="4K"
                             />
                         </FormGroup>
                     </div>
-                    <div className="drive">
-                        <h1>Drive</h1>
-                        <FormGroup className="group">
-                            <FormControlLabel
-                                control={<Checkbox name="drive" value="1hdd+256ssd" onChange={handleFilters} />}
-                                label="1TB + 256GB SSD"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox name="drive" value="1ssd" onChange={handleFilters} />}
-                                label="1TB SSD"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox name="drive" value="512ssd" onChange={handleFilters} />}
-                                label="512GB SSD"
-                            />
-                        </FormGroup>
-                    </div>
-                    <div className="graphicsCard">
-                        <h1>Graphics Card</h1>
-                        <FormGroup className="group">
-                            <FormControlLabel
-                                control={<Checkbox name="graphicsCard" value="gtx1650" onChange={handleFilters} />}
-                                label="GTX 1650"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox name="graphicsCard" value="rtx3050" onChange={handleFilters} />}
-                                label="RTX 3050"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox name="graphicsCard" value="rtx3050ti" onChange={handleFilters} />}
-                                label="RTX 3050 ti"
-                            />
-                        </FormGroup>
-                    </div>
+
                 </div>
             </div>
         </>
