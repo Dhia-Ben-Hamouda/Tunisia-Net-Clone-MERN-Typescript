@@ -21,10 +21,10 @@ export default function () {
     useEffect(()=>{
         async function fetchData(){
             try{
-                const response = await fetch(`${url}/computers/getPaginatedComputers?params=${JSON.stringify(params)}`);
+                const response = await fetch(`${url}/computers/getPaginatedScreens?params=${JSON.stringify(params)}`);
                 const data = await response.json();
 
-                setScreens(data.computers);
+                setScreens(data.screens);
             }catch(err){
                 console.error(err);
             }

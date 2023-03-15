@@ -6,8 +6,20 @@ import { useState } from "react";
 export default function ({ params, setParams }: any) {
     const [priceRange, setPriceRange] = useState<any>([0, 4000]);
 
-    function handleFilters() {
+    function handleFilters(e: any) {
+        const name = e.target.name;
+        const value = e.target.value;
 
+        if (e.target.checked) {
+            let arr = params[name];
+            arr.push(value);
+            setParams({ ...params, [name]: arr });
+        }
+        else {
+            let arr = params[name];
+            arr = arr.filter((item: any) => item !== value);
+            setParams({ ...params, [name]: arr });
+        }
     }
 
     return (
@@ -66,19 +78,19 @@ export default function ({ params, setParams }: any) {
                         <h1>Procesor</h1>
                         <FormGroup className="group">
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="ryzen5" onChange={handleFilters} />}
+                                control={<Checkbox name="procesor" value="AMDRyzen5" onChange={handleFilters} />}
                                 label="AMD Ryzen 5"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="i5" onChange={handleFilters} />}
+                                control={<Checkbox name="procesor" value="IntelCorei5" onChange={handleFilters} />}
                                 label="Intel Core i5"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="ryzen7" onChange={handleFilters} />}
+                                control={<Checkbox name="procesor" value="AMDRyzen7" onChange={handleFilters} />}
                                 label="AMD Ryzen 7"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="procesor" value="i7" onChange={handleFilters} />}
+                                control={<Checkbox name="procesor" value="IntelCorei7" onChange={handleFilters} />}
                                 label="Intel Core i7"
                             />
                         </FormGroup>
@@ -95,6 +107,10 @@ export default function ({ params, setParams }: any) {
                                 label="16 gb"
                             />
                             <FormControlLabel
+                                control={<Checkbox name="memory" value="24gb" onChange={handleFilters} />}
+                                label="24 gb"
+                            />
+                            <FormControlLabel
                                 control={<Checkbox name="memory" value="32gb" onChange={handleFilters} />}
                                 label="32 gb"
                             />
@@ -104,15 +120,15 @@ export default function ({ params, setParams }: any) {
                         <h1>Drive</h1>
                         <FormGroup className="group">
                             <FormControlLabel
-                                control={<Checkbox name="drive" value="1hdd+256ssd" onChange={handleFilters} />}
+                                control={<Checkbox name="drive" value="1TB256GBSSD" onChange={handleFilters} />}
                                 label="1TB + 256GB SSD"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="drive" value="1ssd" onChange={handleFilters} />}
+                                control={<Checkbox name="drive" value="1TBSSD" onChange={handleFilters} />}
                                 label="1TB SSD"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="drive" value="512ssd" onChange={handleFilters} />}
+                                control={<Checkbox name="drive" value="512GBSSD" onChange={handleFilters} />}
                                 label="512GB SSD"
                             />
                         </FormGroup>

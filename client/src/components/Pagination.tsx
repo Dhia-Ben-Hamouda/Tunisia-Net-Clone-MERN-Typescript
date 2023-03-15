@@ -1,7 +1,7 @@
 import React from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const Pagination = ({ page, setPage, pages }: any) => {
+const Pagination = ({ page, setParams: setPage, pages }: any) => {
 
     let paginate;
 

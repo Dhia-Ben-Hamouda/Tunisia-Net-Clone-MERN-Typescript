@@ -6,8 +6,20 @@ import { useState } from "react";
 export default function ({ params, setParams }: any) {
     const [priceRange, setPriceRange] = useState<any>([0, 500]);
 
-    function handleFilters() {
+    function handleFilters(e: any) {
+        const name = e.target.name;
+        const value = e.target.value;
 
+        if (e.target.checked) {
+            let arr = params[name];
+            arr.push(value);
+            setParams({ ...params, [name]: arr });
+        }
+        else {
+            let arr = params[name];
+            arr = arr.filter((item: any) => item !== value);
+            setParams({ ...params, [name]: arr });
+        }
     }
 
     return (

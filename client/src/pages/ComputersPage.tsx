@@ -6,12 +6,16 @@ import Pagination from "../components/Pagination";
 import { useEffect } from "react";
 import { url } from "../api/baseURL";
 import { Computer } from "../@types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchComputers } from "../app/actionCreators/computerActionCreators";
+import { State } from "../app/rootReducer";
+import Skeletons from "../components/ProductLoader";
 
 export default function () {
-    const [computers , setComputers] = useState<Computer[]>([]);
+    const dispatch: any = useDispatch();
+    const { computers , loading , numberOfPages } = useSelector((state: State) => state.computers);
     const [params, setParams] = useState({
         page:1,
-        numberOfPages:1,
         price:[0,4000],
         brand:[],
         procesor:[],
@@ -21,17 +25,8 @@ export default function () {
     })
 
     useEffect(()=>{
-        async function fetchData(){
-            try{
-                const response = await fetch(`${url}/computers/getPaginatedComputers?params=${JSON.stringify(params)}`);
-                const data = await response.json();
-
-                setComputers(data.computers);
-            }catch(err){
-                console.error(err);
-            }
-        }
-        fetchData();
+        console.log(params);
+        dispatch(fetchComputers(params));
     } , [params]);
 
     return (
@@ -45,7 +40,7 @@ export default function () {
                     />
                     <div className="products">
                         {
-                            computers?.map(({name, _id: id, description, rating, pictures, price }: Computer) => {
+                            !loading ? computers?.map(({name, _id: id, description, rating, pictures, price }: Computer) => {
                                 return(
                                     <Product 
                                         key={id}
@@ -57,17 +52,17 @@ export default function () {
                                         rating={rating}
                                     />
                                 )
-                            })
+                            }) : <Skeletons />
                         }
                         
                     </div>
                 </div>
                 <div className="pagination">
-                    {/* <Pagination
-                        page={page}
-                        pages={numOfPages}
-                        setPage={setPage}
-                    /> */}
+                    <Pagination
+                        page={params.page}
+                        pages={numberOfPages}
+                        setParams={setParams}
+                    />
                 </div>
             </section>
         </>

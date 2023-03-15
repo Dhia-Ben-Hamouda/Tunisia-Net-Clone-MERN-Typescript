@@ -47,7 +47,7 @@ const screenSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
-        enum:["HD" , "Full HD" , "QHD" , "4K"]
+        enum:["HD" , "FullHD" , "QHD" , "4K"]
     }
 })
 

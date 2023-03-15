@@ -6,11 +6,11 @@ export async function getPaginatedComputers(req, res) {
 
         const limit = 6;
         const skip = (limit * (page - 1));
-        const count = await Computer.countDocuments({ brand, procesor, graphicsCard, memory, storage }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({rating:-1});
+        const count = await Computer.countDocuments({brand:{$in:brand} , procesor:{$in:procesor} , graphicsCard:{$in:graphicsCard} , memory:{$in:memory} , storage:{$in:storage}  }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({rating:-1});
         const numberOfPages = Math.ceil(count / limit);
-        const computers = await Computer.find({ brand, procesor, graphicsCard, memory, storage }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({rating:-1});
+        const computers = await Computer.find().where("brand").in(brand).where("procesor").in(procesor).where("graphicsCard").in(graphicsCard).where("memory").in(memory).where("storage").in(storage).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({rating:-1});
 
-        return res.statut(200).json({
+        return res.status(200).json({
             computers,
             numberOfPages,
         })
