@@ -4,12 +4,12 @@ import { Skeleton } from "@mui/material";
 export default function(){
     return(
         <>
-            <Skeleton className="skeleton" />
-            <Skeleton className="skeleton" />
-            <Skeleton className="skeleton" />
-            <Skeleton className="skeleton" />
-            <Skeleton className="skeleton" />
-            <Skeleton className="skeleton" />
+            <Skeleton className="skeleton" height={"228px"} />
+            <Skeleton className="skeleton" height={"228px"} />
+            <Skeleton className="skeleton" height={"228px"} />
+            <Skeleton className="skeleton" height={"228px"} />
+            <Skeleton className="skeleton" height={"228px"} />
+            <Skeleton className="skeleton" height={"228px"} />
         </>
     )
 }

@@ -11,7 +11,7 @@ type State = {
     numberOfPages: number,
     computers: Computer[],
     loading: boolean,
-    error?: string | null
+    error: string | null
 }
 
 const initialState = {

@@ -6,12 +6,16 @@ import Pagination from "../components/Pagination";
 import { useEffect } from "react";
 import { url } from "../api/baseURL";
 import { Screen } from "../@types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "../app/rootReducer";
+import { fetchScreens } from "../app/actionCreators/screenActionCreators";
+import ProductLoader from "../components/ProductLoader";
 
 export default function () {
-    const [screens , setScreens] = useState<Screen[]>([]);
+    const dispatch: any = useDispatch();
+    const { loading , screens , numberOfPages } = useSelector((state: State) => state.screens);
     const [params, setParams] = useState({
         page:1,
-        numberOfPages:1,
         price:[0,4000],
         brand:[],
         size:[],
@@ -19,17 +23,7 @@ export default function () {
     })
 
     useEffect(()=>{
-        async function fetchData(){
-            try{
-                const response = await fetch(`${url}/computers/getPaginatedScreens?params=${JSON.stringify(params)}`);
-                const data = await response.json();
-
-                setScreens(data.screens);
-            }catch(err){
-                console.error(err);
-            }
-        }
-        fetchData();
+        dispatch(fetchScreens(params));
     } , [params]);
 
     return (
@@ -43,7 +37,7 @@ export default function () {
                     />
                     <div className="products">
                         {
-                            screens.map(({name, _id: id, description, rating, pictures, price }: Screen) => {
+                            !loading ? screens.map(({name, _id: id, description, rating, pictures, price }: Screen) => {
                                 return(
                                     <Product 
                                         key={id}
@@ -55,17 +49,17 @@ export default function () {
                                         rating={rating}
                                     />
                                 )
-                            })
+                            }) : <ProductLoader/>
                         }
                         
                     </div>
                 </div>
                 <div className="pagination">
-                    {/* <Pagination
-                        page={page}
-                        pages={numOfPages}
-                        setPage={setPage}
-                    /> */}
+                    <Pagination
+                        page={params.page}
+                        pages={numberOfPages}
+                        setParams={setParams}
+                    />
                 </div>
             </section>
         </>

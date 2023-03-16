@@ -6,12 +6,16 @@ import Pagination from "../components/Pagination";
 import { useEffect } from "react";
 import { url } from "../api/baseURL";
 import { Keyboard } from "../@types/types";
+import { fetchKeyboards } from "../app/actionCreators/keyboardActionCreators";
+import { useDispatch , useSelector } from "react-redux";
+import { State } from "../app/rootReducer";
+import ProductLoader from "../components/ProductLoader";
 
 export default function () {
-    const [keyboards, setKeyboards] = useState<Keyboard[]>([]);
+    const dispatch: any = useDispatch();
+    const { loading , keyboards , numberOfPages } = useSelector((state: State) => state.keyboards);
     const [params, setParams] = useState({
         page: 1,
-        numberOfPages: 1,
         price: [0, 500],
         brand: [],
         wireless: [],
@@ -19,7 +23,7 @@ export default function () {
     })
 
     useEffect(() => {
-        
+        dispatch(fetchKeyboards(params));
     }, [params]);
 
     return (
@@ -33,7 +37,7 @@ export default function () {
                     />
                     <div className="products">
                         {
-                            keyboards.map(({ name, _id: id, description, rating, pictures, price }: Keyboard) => {
+                            !loading ? keyboards.map(({ name, _id: id, description, rating, pictures, price }: Keyboard) => {
                                 return (
                                     <Product
                                         key={id}
@@ -45,17 +49,17 @@ export default function () {
                                         rating={rating}
                                     />
                                 )
-                            })
+                            }) : <ProductLoader/>
                         }
 
                     </div>
                 </div>
                 <div className="pagination">
-                    {/* <Pagination
-                        page={page}
-                        pages={numOfPages}
-                        setPage={setPage}
-                    /> */}
+                    <Pagination
+                        page={params.page}
+                        pages={numberOfPages}
+                        setParams={setParams}
+                    />
                 </div>
             </section>
         </>

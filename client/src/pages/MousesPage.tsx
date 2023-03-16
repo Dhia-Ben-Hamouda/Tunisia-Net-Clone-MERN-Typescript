@@ -6,29 +6,23 @@ import Pagination from "../components/Pagination";
 import { useEffect } from "react";
 import { url } from "../api/baseURL";
 import { Mouse } from "../@types/types";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "../app/rootReducer";
+import { fetchMouses } from "../app/actionCreators/mouseActionCreators";
+import ProductLoader from "../components/ProductLoader";
 
 export default function () {
-    const [mouses , setMouses] = useState<Mouse[]>([]);
+    const dispatch: any = useDispatch();
+    const { loading , mouses , numberOfPages } = useSelector((state: State) => state.mouses);
     const [params, setParams] = useState({
         page:1,
-        numberOfPages:1,
         price:[0,4000],
         brand:[],
         wireless:[]
     })
 
     useEffect(()=>{
-        async function fetchData(){
-            try{
-                const response = await fetch(`${url}/mouses/getPaginatedMouses?params=${JSON.stringify(params)}`);
-                const data = await response.json();
-
-                setMouses(data.mouses);
-            }catch(err){
-                console.error(err);
-            }
-        }
-        fetchData();
+        dispatch(fetchMouses(params));
     } , [params]);
 
     return (
@@ -42,7 +36,7 @@ export default function () {
                     />
                     <div className="products">
                         {
-                            mouses.map(({name, _id: id, description, rating, pictures, price }: Mouse) => {
+                            !loading ? mouses.map(({name, _id: id, description, rating, pictures, price }: Mouse) => {
                                 return(
                                     <Product 
                                         key={id}
@@ -54,17 +48,17 @@ export default function () {
                                         rating={rating}
                                     />
                                 )
-                            })
+                            }) : <ProductLoader/>
                         }
                         
                     </div>
                 </div>
                 <div className="pagination">
-                    {/* <Pagination
-                        page={page}
-                        pages={numOfPages}
-                        setPage={setPage}
-                    /> */}
+                    <Pagination
+                        page={params.page}
+                        pages={numberOfPages}
+                        setParams={setParams}
+                    />
                 </div>
             </section>
         </>
