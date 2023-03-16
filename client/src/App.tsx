@@ -11,6 +11,7 @@ import ForgetPassword from "./components/auth/ForgetPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import AuthForm from "./components/auth/AuthForm";
 import DashboardPage from "./pages/DashboardPage";
+import ProductDetails from "./pages/ProductDetails";
 
 export default function () {
     return (
@@ -24,9 +25,13 @@ export default function () {
                 </Route>
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/computers" element={<ComputersPage />} />
+                <Route path="/computers/:id" element={<ProductDetails/>} />
                 <Route path="/keyboards" element={<KeyboardsPage />} />
+                <Route path="/keyboards/:id" element={<ProductDetails/>} />
                 <Route path="/screens" element={<ScreensPage />} />
+                <Route path="/screens/:id" element={<ProductDetails/>} />
                 <Route path="/mouses" element={<MousesPage />} />
+                <Route path="/mouses/:id" element={<ProductDetails/>} />
                 <Route path="/dashboard" element={<DashboardPage />} />
             </Routes>
         </>

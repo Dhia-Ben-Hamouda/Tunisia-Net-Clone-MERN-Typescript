@@ -19,17 +19,7 @@ export default function () {
     })
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch(`${url}/keyboards/getPaginatedKeyboards?params=${JSON.stringify(params)}`);
-                const data = await response.json();
-
-                setKeyboards(data.keyboards);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-        fetchData();
+        
     }, [params]);
 
     return (

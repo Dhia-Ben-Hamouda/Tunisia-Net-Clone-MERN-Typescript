@@ -8,7 +8,7 @@ export default function ({ name, id, description, pictures, price, rating }: Com
     return (
         <div className="product">
             <div className="left">
-                <Link to={`/`} >
+                <Link to={`/computers/${id}`} >
                     <img src={pictures[0]} alt="" />
                 </Link>
             </div>

@@ -2,7 +2,27 @@ import Computer from "../models/Computer.js";
 
 export async function getPaginatedComputers(req, res) {
     try {
-        const { page, brand, procesor, graphicsCard, memory, storage, price } = JSON.parse(req.query.params);
+        let { page, brand, procesor, graphicsCard, memory, storage, price } = JSON.parse(req.query.params);
+
+        if(brand.length === 0){
+            brand = ["HP", "Asus", "Dell"]
+        }
+
+        if(procesor.length === 0){
+            procesor = ["AMDRyzen5", "AMDRyzen7", "IntelCorei5", "IntelCorei7"]
+        }
+
+        if(memory.length === 0){
+            memory = ["8gb", "16gb", "24gb", "32gb"]
+        }
+
+        if(storage.length === 0){
+            storage = ["1TB256GBSSD" , "1TBSSD" , "512GBSSD"]
+        }
+
+        if(graphicsCard.length === 0){
+            graphicsCard = ["GTX1650" , "RTX3050" , "RTX3050ti"]
+        }
 
         const limit = 6;
         const skip = (limit * (page - 1));
