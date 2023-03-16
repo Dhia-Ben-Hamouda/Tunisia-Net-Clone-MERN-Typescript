@@ -1,7 +1,7 @@
 import React from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const Pagination = ({ page, setParams, pages }: any) => {
+const Pagination = ({ page, setParams, pages, params }: any) => {
 
     let paginate;
 
@@ -9,16 +9,16 @@ const Pagination = ({ page, setParams, pages }: any) => {
         if (page > 1) {
             paginate = (
                 <>
-                    <button onClick={() => { setParams(page - 1) }}><FaAngleLeft /></button>
+                    <button onClick={() => { setParams({...params , page:page - 1}) }}><FaAngleLeft /></button>
                     {
-                        page + 1 > pages && <button onClick={() => { setParams(page - 2) }}>{page - 2}</button>
+                        page + 1 > pages && <button onClick={() => { setParams({...params , page:page - 2}) }}>{page - 2}</button>
                     }
-                    <button onClick={() => { setParams(page - 1) }}>{page - 1}</button>
-                    <button className="active" onClick={() => { setParams(page) }}>{page}</button>
+                    <button onClick={() => { setParams({...params , page:page - 1}) }}>{page - 1}</button>
+                    <button className="active" onClick={() => { setParams({...params , page}) }}>{page}</button>
                     {
                         page + 1 <= pages && <>
-                            <button onClick={() => { setParams(page + 1) }}>{page + 1}</button>
-                            <button onClick={() => { setParams(page + 1) }}><FaAngleRight /></button> </>
+                            <button onClick={() => { setParams({...params , page:page + 1}) }}>{page + 1}</button>
+                            <button onClick={() => { setParams({...params , page:page + 1}) }}><FaAngleRight /></button> </>
                     }
                 </>
             )
@@ -27,9 +27,9 @@ const Pagination = ({ page, setParams, pages }: any) => {
             paginate = (
                 <>
                     <button className="active" onClick={() => { setParams(page) }}>{page}</button>
-                    <button onClick={() => { setParams(page + 1) }}>{page + 1}</button>
-                    <button onClick={() => { setParams(page + 2) }}>{page + 2}</button>
-                    <button onClick={() => { setParams(page + 1) }}><FaAngleRight /></button>
+                    <button onClick={() => { setParams({...params , page:page + 1}) }}>{page + 1}</button>
+                    <button onClick={() => { setParams({...params , page:page + 2}) }}>{page + 2}</button>
+                    <button onClick={() => { setParams({...params , page:page + 1}) }}><FaAngleRight /></button>
                 </>
             )
         }
@@ -47,17 +47,17 @@ const Pagination = ({ page, setParams, pages }: any) => {
                 paginate = (
                     <>
                         <button className="active" onClick={() => { setParams(1) }}>1</button>
-                        <button onClick={() => { setParams(2) }}>2</button>
-                        <button onClick={() => { setParams(2) }}><FaAngleRight /></button>
+                        <button onClick={() => { setParams({...params , page:2}) }}>2</button>
+                        <button onClick={() => { setParams({...params , page:2}) }}><FaAngleRight /></button>
                     </>
                 )
             }
             else {
                 paginate = (
                     <>
-                        <button onClick={() => { setParams(1) }}><FaAngleLeft /></button>
-                        <button onClick={() => { setParams(1) }}>1</button>
-                        <button className="active" onClick={() => { setParams(2) }}>2</button>
+                        <button onClick={() => { setParams({...params , page:1}) }}><FaAngleLeft /></button>
+                        <button onClick={() => { setParams({...params , page:1}) }}>1</button>
+                        <button className="active" onClick={() => { setParams({...params , page:2}) }}>2</button>
                     </>
                 )
             }

@@ -1,7 +1,7 @@
 nav{
     background: url("../images/navbar.jpg");
     background-size: 100% 100%;
-    padding: .5rem 5vw;
+    padding: .35rem 5vw;
     display: flex;
     justify-content: space-between;
     position: sticky;
@@ -67,16 +67,16 @@ nav{
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height:40px;
-                width:40px;
+                height:35px;
+                width:35px;
                 border-radius: 50%;
                 transition: .5s;
                 cursor: pointer;
 
                 .search{
                     color:white;
-                    height:1.25rem;
-                    width:1.25rem;   
+                    height:1.15rem;
+                    width:1.15rem;   
                 }
 
                 &:hover{

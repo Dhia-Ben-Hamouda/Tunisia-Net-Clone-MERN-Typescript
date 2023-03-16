@@ -24,6 +24,8 @@ export default function () {
         graphicsCard:[]
     })
 
+    console.log(numberOfPages);
+
     useEffect(()=>{
         dispatch(fetchComputers(params));
     } , [params]);
@@ -61,6 +63,7 @@ export default function () {
                         page={params.page}
                         pages={numberOfPages}
                         setParams={setParams}
+                        params={params}
                     />
                 </div>
             </section>

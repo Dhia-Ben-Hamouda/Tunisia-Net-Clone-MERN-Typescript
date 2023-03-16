@@ -58,6 +58,7 @@ export default function () {
                         page={params.page}
                         pages={numberOfPages}
                         setParams={setParams}
+                        params={params}
                     />
                 </div>
             </section>
