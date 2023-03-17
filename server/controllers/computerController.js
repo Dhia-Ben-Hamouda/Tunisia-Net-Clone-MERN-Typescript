@@ -41,7 +41,7 @@ export async function getPaginatedComputers(req, res) {
             graphicsCard: { $in: graphicsCard },
             memory: { $in: memory },
             storage: { $in: storage }
-        }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price:1 , rating: -1 });
+        }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price: 1, rating: -1 });
 
         return res.status(200).json({
             computers,
@@ -81,7 +81,8 @@ export async function getComputer(req, res) {
 
 export async function insertComputer(req, res) {
     try {
-        await Computer.create(req.body);
+        const { name, description, price, pictures, brand, procesor, memory, storage, graphicsCard } = req.body;
+        await Computer.create({ name, description, price, pictures, brand, procesor, memory, storage, graphicsCard });
 
         return res.status(201).json({
             msg: "computer has been inserted successfully"
@@ -110,8 +111,10 @@ export async function deleteComputer(req, res) {
 
 export async function updateComputer(req, res) {
     try {
+        const { name, description, price, pictures, brand, procesor, memory, storage, graphicsCard } = req.body;
         const { id } = req.params;
-        await Computer.findByIdAndUpdate(id, req.body);
+
+        await Computer.findByIdAndUpdate(id, { name, description, price, pictures, brand, procesor, memory, storage, graphicsCard });
 
         return res.status(201).json({
             msg: "computer has been updated successfully"

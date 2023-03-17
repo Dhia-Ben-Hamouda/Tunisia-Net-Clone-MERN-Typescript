@@ -7,21 +7,21 @@ export default function () {
     return (
         <>
             <nav>
-                <Link to="/">
-                    <img className="logo" src={logo} />
+                <Link aria-label="home" to="/">
+                    <img className="logo" src={logo} alt="logo" />
                 </Link>
                 <ul className="desktop-list" >
                     <li>
-                        <Link to="/computers">Computers</Link>
+                        <Link aria-label="computers" to="/computers">Computers</Link>
                     </li>
                     <li>
-                        <Link to="/keyboards">Keyboards</Link>
+                        <Link aria-label="keyboards" to="/keyboards">Keyboards</Link>
                     </li>
                     <li>
-                        <Link to="/mouses">Mouses</Link>
+                        <Link aria-label="mouses" to="/mouses">Mouses</Link>
                     </li>
                     <li>
-                        <Link to="/screens">Screens</Link>
+                        <Link aria-label="screens" to="/screens">Screens</Link>
                     </li>
                 </ul>
                 <div className="container">
@@ -34,12 +34,12 @@ export default function () {
                         />
                     </div>
                     <div className="user">
-                        <Link to="/auth">
+                        <Link aria-label="auth" to="/auth">
                             <FaUser className="icon user" />
                         </Link>
                     </div>
                     <div className="cart">
-                        <Link to="/cart">
+                        <Link aria-label="cart" to="/cart">
                             <FaShoppingCart className="icon cart-icon" />
                             <div className="num">
                                 0

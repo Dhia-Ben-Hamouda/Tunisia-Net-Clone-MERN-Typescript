@@ -1,13 +1,15 @@
 import express from "express";
+import { deleteMouse, getAllMouses, getMouse } from "../controllers/mouseController.js";
+import { getPaginatedMouses, insertMouse, updateMouse } from "../controllers/mouseController.js";
 
 const router = express.Router();
 router.use(express.json());
 
-router.get("/getPaginatedKeyboards" , );
-router.get("/getAllKeyboards" , );
-router.get("/getKeyboard/:id" , );
-router.post("/insertKeyboard" , );
-router.delete("/deleteKeyboard/:id" , );
-router.patch("/updateKeyboard/:id" , );
+router.get("/getPaginatedMouses" , getPaginatedMouses);
+router.get("/getAllMouses" , getAllMouses);
+router.get("/getMouse/:id" , getMouse);
+router.post("/insertMouse" , insertMouse);
+router.delete("/deleteMouse/:id" , deleteMouse);
+router.patch("/updateMouse/:id" , updateMouse);
 
 export default router;

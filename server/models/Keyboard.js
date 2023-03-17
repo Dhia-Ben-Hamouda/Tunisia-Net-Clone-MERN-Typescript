@@ -14,11 +14,16 @@ const keyboardSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    comments:{
+    rating:{
+        type:Number,
+        required:true,
+        default:0
+    },
+    reviews:{
         type:[
             {
                 type:mongoose.Schema.Types.ObjectId,
-                ref:"comments"
+                ref:"reviews"
             }
         ],
         default:[]

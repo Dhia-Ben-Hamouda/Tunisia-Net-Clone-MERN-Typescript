@@ -5,31 +5,31 @@ export async function getPaginatedKeyboards(req, res) {
         let { page, brand, mechanical, wireless, price } = JSON.parse(req.query.params);
 
         if (brand.length === 0) {
-            brand = ["HP", "Asus", "Dell" , "Redragon"]
+            brand = ["HP", "Asus", "Dell", "Redragon"]
         }
 
         if (mechanical.length === 0) {
-            mechanical = ["yes","no"]
+            mechanical = ["yes", "no"]
         }
 
         if (wireless.length === 0) {
-            wireless = ["yes","no"]
+            wireless = ["yes", "no"]
         }
 
         const limit = 5;
         const skip = (limit * (page - 1));
         const count = await Keyboard.countDocuments({
             brand: { $in: brand },
-            mechanical:{ $in: mechanical },
-            wireless:{ $in:wireless }
+            mechanical: { $in: mechanical },
+            wireless: { $in: wireless }
         }).where("price").lte(price[1]).gte(price[0]);
 
         const numberOfPages = Math.ceil(count / limit);
         const keyboards = await Keyboard.find({
             brand: { $in: brand },
-            mechanical:{ $in: mechanical },
-            wireless:{ $in:wireless }
-        }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ rating: -1 });
+            mechanical: { $in: mechanical },
+            wireless: { $in: wireless }
+        }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price: 1, rating: -1 });
 
         return res.status(200).json({
             keyboards,
@@ -69,7 +69,8 @@ export async function getkeyboard(req, res) {
 
 export async function insertkeyboard(req, res) {
     try {
-        await Keyboard.create(req.body);
+        const { name, description, price, pictures, brand, mechanical, wireless } = req.body;
+        await Keyboard.create({ name, description, price, pictures, brand, mechanical, wireless });
 
         return res.status(201).json({
             msg: "keyboard has been inserted successfully"
