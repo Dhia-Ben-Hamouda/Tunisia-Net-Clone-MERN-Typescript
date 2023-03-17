@@ -30,7 +30,7 @@ export default function(state: State = initialState , action: Action){
         case actionTypes.FETCH_SCREENS_SUCCESS:
             return produce(state , (draft)=>{
                 draft.loading = false;
-                draft.numberOfPages = action.payload.numberOfPages;
+                draft.numberOfPages = action.payload.numberOfPages ? action.payload.numberOfPages : 1;
                 draft.screens = action.payload.screens;
             })
         case actionTypes.FETCH_SCREENS_ERROR:

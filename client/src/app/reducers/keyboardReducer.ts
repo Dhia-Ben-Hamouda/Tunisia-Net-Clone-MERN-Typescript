@@ -29,9 +29,12 @@ export default function(state: State = initialState , action: Action){
             })
         case actionTypes.FETCH_KEYBOARDS_SUCCESS:
             return produce(state , (draft)=>{
+
+                console.log(action.payload.numberOfPages);
+
                 draft.loading = false;
                 draft.keyboards = action.payload.keyboards;
-                draft.numberOfPages = action.payload.numberOfPages
+                draft.numberOfPages = action.payload.numberOfPages ? action.payload.numberOfPages : 1;
             })
         case actionTypes.FETCH_KEYBOARDS_ERROR:
             return produce(state , (draft)=>{

@@ -1,6 +1,6 @@
 import express from "express";
-import { deletekeyboard, getAllkeyboards, getkeyboard } from "../controllers/keyboardController";
-import { getPaginatedKeyboards, insertkeyboard, updatekeyboard } from "../controllers/keyboardController";
+import { deletekeyboard, getAllkeyboards, getkeyboard } from "../controllers/keyboardController.js";
+import { getPaginatedKeyboards, insertkeyboard, updatekeyboard } from "../controllers/keyboardController.js";
 
 const router = express.Router();
 router.use(express.json());

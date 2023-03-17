@@ -25,6 +25,7 @@
     .wrapper{
         display: flex;
         align-items: flex-start;
+        gap:1rem;
 
         .products{
             width:70%;
@@ -50,13 +51,19 @@
                         border:none;
                         outline:none;
                         color:white;
-                        background:red;
+                        background:#BF1020;
+                        cursor: pointer;
                         width:50%;
+                        border-radius: 5px;
+                        transition: .5S;
 
                         &:first-of-type{
-                            background:green;
+                            background:#008000;
                         }
                             
+                        &:hover{
+                            transform: scale(1.05);
+                        }
 
                     }
                 }

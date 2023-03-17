@@ -17,7 +17,9 @@ export default function () {
     const [memory, setMemory] = useState("");
     const [storage, setStorage] = useState("");
     const [graphicsCard, setGraphicsCard] = useState("");
-    const [price , setPrice] = useState("");
+    const [price, setPrice] = useState("");
+    const [mechanical , setMechanical] = useState("");
+    const [wireless , setWireless] = useState("");
 
     useEffect(() => {
         async function fetchData() {
@@ -44,13 +46,13 @@ export default function () {
         }
     }
 
-    async function submitHandler(e: React.FormEvent){
+    async function submitHandler(e: React.FormEvent) {
         e.preventDefault();
 
-        const response = await fetch(`${url}/computers/insertComputer` , {
-            method:"POST",
-            headers:{
-                "content-type":"application/json"
+        const response = await fetch(`${url}/${current}/insert${current[0].toUpperCase() + current.slice(1)}`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
             },
             body: JSON.stringify({
                 name,
@@ -61,7 +63,9 @@ export default function () {
                 graphicsCard,
                 memory,
                 storage,
-                price
+                price,
+                wireless,
+                mechanical
             })
         })
         const data = await response.json();
@@ -88,12 +92,12 @@ export default function () {
                 <div className="wrapper">
                     <div className="products">
                         {
-                            products.map(({name , description , price , brand , graphicsCard , _id , memory , pictures , procesor , reviews , storage}: Computer)=>{
-                                return(
+                            products.map(({ name, description, price, brand, graphicsCard, _id, memory, pictures, procesor, reviews, storage }: Computer) => {
+                                return (
                                     <div className="product">
                                         <img src={pictures[0]} alt="" />
                                         <h1>{name}</h1>
-                                        <p>{description.slice(0 , 160)}...</p>
+                                        <p>{description.slice(0, 160)}...</p>
                                         <h3>{price.toFixed(3)} DT</h3>
                                         <div className="buttons">
                                             <button>edit</button>
@@ -142,6 +146,16 @@ export default function () {
                                 <MenuItem value="GTX1650" >GTX 1650</MenuItem>
                                 <MenuItem value="RTX3050" >RTX 3050</MenuItem>
                                 <MenuItem value="RTX3050ti" >RTX 3050 ti</MenuItem>
+                            </TextField>
+                        </div>
+                        <div>
+                            <TextField select label="mechanical" value={mechanical} onChange={e => setMechanical(e.target.value)} >
+                                <MenuItem value="yes" >Yes</MenuItem>
+                                <MenuItem value="no" >no</MenuItem>
+                            </TextField>
+                            <TextField select label="wireless" value={wireless} onChange={e => setWireless(e.target.value)} >
+                                <MenuItem value="yes" >Yes</MenuItem>
+                                <MenuItem value="no" >no</MenuItem>
                             </TextField>
                         </div>
                         <input type="file" multiple onChange={fileHandler} />

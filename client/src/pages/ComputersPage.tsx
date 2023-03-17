@@ -9,7 +9,7 @@ import { Computer } from "../@types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComputers } from "../app/actionCreators/computerActionCreators";
 import { State } from "../app/rootReducer";
-import Skeletons from "../components/ProductLoader";
+import Skeletons from "../components/Skeletons";
 
 export default function () {
     const dispatch: any = useDispatch();

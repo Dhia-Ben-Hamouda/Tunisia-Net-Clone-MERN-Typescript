@@ -31,7 +31,7 @@ export default function (state: State = initialState, action: Action) {
             return produce(state, (draft) => {
                 draft.loading = false;
                 draft.computers = action.payload.computers;
-                draft.numberOfPages = action.payload.numberOfPages;
+                draft.numberOfPages = action.payload.numberOfPages ? action.payload.numberOfPages : 1;
             })
         case actionTypes.FETCH_COMPUTERS_ERROR:
             return produce(state, (draft) => {

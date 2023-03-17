@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import Navbar from "../components/Navbar";
 import DesktopFilter from "../components/mouses/DesktopFilter";
 import Product from "../components/computers/Computer";
 import Pagination from "../components/Pagination";
-import { useEffect } from "react";
-import { url } from "../api/baseURL";
 import { Mouse } from "../@types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../app/rootReducer";
 import { fetchMouses } from "../app/actionCreators/mouseActionCreators";
-import ProductLoader from "../components/ProductLoader";
+import Skeletons from "../components/Skeletons";
 
 export default function () {
     const dispatch: any = useDispatch();
@@ -48,7 +46,7 @@ export default function () {
                                         rating={rating}
                                     />
                                 )
-                            }) : <ProductLoader/>
+                            }) : <Skeletons/>
                         }
                         
                     </div>

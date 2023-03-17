@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
 import computerRoutes from "./routes/computerRoutes.js";
+import keyboardRoutes from "./routes/keyboardRoutes.js";
+import mouseRoutes from "./routes/mouseRoutes.js";
+import screenRoutes from "./routes/screenRoutes.js";
 
 const app = express();
 
@@ -37,3 +40,6 @@ app.listen(port , ()=>{
 
 app.use("/auth" , authRoutes);
 app.use("/computers" , computerRoutes);
+app.use("/keyboards" , keyboardRoutes);
+app.use("/mouses" , mouseRoutes);
+app.use("/screens" , screenRoutes);
