@@ -24,9 +24,8 @@ export default function () {
         graphicsCard:[]
     })
 
-    console.log(numberOfPages);
-
     useEffect(()=>{
+        console.log(params);
         dispatch(fetchComputers(params));
     } , [params]);
 

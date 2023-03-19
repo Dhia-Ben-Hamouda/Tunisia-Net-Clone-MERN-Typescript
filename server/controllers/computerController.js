@@ -35,7 +35,7 @@ export async function getPaginatedComputers(req, res) {
         }).where("price").lte(price[1]).gte(price[0]);
 
         const numberOfPages = Math.ceil(count / limit);
-        const computers = await Computer.find({
+        let computers = await Computer.find({
             brand: { $in: brand },
             procesor: { $in: procesor },
             graphicsCard: { $in: graphicsCard },

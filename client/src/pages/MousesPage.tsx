@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react";
 import Navbar from "../components/Navbar";
 import DesktopFilter from "../components/mouses/DesktopFilter";
-import Product from "../components/computers/Computer";
+import Product from "../components/mouses/Mouse";
 import Pagination from "../components/Pagination";
 import { Mouse } from "../@types/types";
 import { useDispatch, useSelector } from "react-redux";

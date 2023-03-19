@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react";
 import Navbar from "../components/Navbar";
 import DesktopFilter from "../components/screens/DesktopFilter";
-import Product from "../components/computers/Computer";
+import Product from "../components/screens/Screen";
 import Pagination from "../components/Pagination";
 import { Screen } from "../@types/types";
 import { useDispatch, useSelector } from "react-redux";

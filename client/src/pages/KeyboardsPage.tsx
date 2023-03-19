@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react";
 import Navbar from "../components/Navbar";
 import DesktopFilter from "../components/keyboards/DesktopFilter";
-import Product from "../components/computers/Computer";
+import Product from "../components/keyboards/Keyboard";
 import Pagination from "../components/Pagination";
 import { Keyboard } from "../@types/types";
 import { fetchKeyboards } from "../app/actionCreators/keyboardActionCreators";

@@ -14,7 +14,7 @@ export default function ({ name, id, description, pictures, price, rating }: Key
             </div>
             <div className="right">
                 <Link to={`/`} className="name">{name}</Link>
-                <div className="description">{description}</div>
+                <div className="description">{description.slice(0 , 300)}...</div>
                 <div className="container">
                     <div className="wrapper">
                         <div className="stars">

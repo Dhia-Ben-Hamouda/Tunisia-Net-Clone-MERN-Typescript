@@ -18,8 +18,10 @@ export default function () {
     const [storage, setStorage] = useState("");
     const [graphicsCard, setGraphicsCard] = useState("");
     const [price, setPrice] = useState("");
-    const [mechanical , setMechanical] = useState("");
-    const [wireless , setWireless] = useState("");
+    const [mechanical, setMechanical] = useState("");
+    const [wireless, setWireless] = useState("");
+    const [size , setSize] = useState("");
+    const [resolution , setResolution] = useState("");
 
     useEffect(() => {
         async function fetchData() {
@@ -49,7 +51,7 @@ export default function () {
     async function submitHandler(e: React.FormEvent) {
         e.preventDefault();
 
-        const response = await fetch(`${url}/${current}/insert${current[0].toUpperCase() + current.slice(1)}`, {
+        const response = await fetch(`${url}/${current}/insert${current[0].toUpperCase() + current.slice(1, current.length - 1)}`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -65,9 +67,20 @@ export default function () {
                 storage,
                 price,
                 wireless,
-                mechanical
+                mechanical,
+                size,
+                resolution
             })
         })
+        const data = await response.json();
+
+        console.log(data);
+    }
+
+    async function deleteHandler(id: any) {
+        const response = await fetch(`${url}/${current}/delete${current[0].toUpperCase() + current.slice(1, current.length - 1)}/${id}`,{
+            method:"DELETE"
+        });
         const data = await response.json();
 
         console.log(data);
@@ -94,14 +107,14 @@ export default function () {
                         {
                             products.map(({ name, description, price, brand, graphicsCard, _id, memory, pictures, procesor, reviews, storage }: Computer) => {
                                 return (
-                                    <div className="product">
+                                    <div key={_id} className="product">
                                         <img src={pictures[0]} alt="" />
                                         <h1>{name}</h1>
                                         <p>{description.slice(0, 160)}...</p>
                                         <h3>{price.toFixed(3)} DT</h3>
                                         <div className="buttons">
-                                            <button>edit</button>
-                                            <button>delete</button>
+                                            <button onClick={() => { deleteHandler(_id) }}>edit</button>
+                                            <button onClick={() => { deleteHandler(_id) }}>delete</button>
                                         </div>
                                     </div>
                                 )
@@ -117,6 +130,7 @@ export default function () {
                                 <MenuItem value="HP" >HP</MenuItem>
                                 <MenuItem value="Asus" >Asus</MenuItem>
                                 <MenuItem value="Dell" >Dell</MenuItem>
+                                <MenuItem value="Redragon" >Redragon</MenuItem>
                             </TextField>
                         </div>
                         <div>
@@ -146,6 +160,20 @@ export default function () {
                                 <MenuItem value="GTX1650" >GTX 1650</MenuItem>
                                 <MenuItem value="RTX3050" >RTX 3050</MenuItem>
                                 <MenuItem value="RTX3050ti" >RTX 3050 ti</MenuItem>
+                            </TextField>
+                        </div>
+                        <div>
+                            <TextField select label="resolution" value={resolution} onChange={e => setResolution(e.target.value)} >
+                                <MenuItem value="HD" >HD</MenuItem>
+                                <MenuItem value="FullHD" >Full HD</MenuItem>
+                                <MenuItem value="QHD" >QHD</MenuItem>
+                                <MenuItem value="4K" >4K</MenuItem>
+                            </TextField>
+                            <TextField select label="size" value={size} onChange={e => setSize(e.target.value)} >
+                                <MenuItem value="21" >21'</MenuItem>
+                                <MenuItem value="24" >24'</MenuItem>
+                                <MenuItem value="27" >27'</MenuItem>
+                                <MenuItem value="32" >32'</MenuItem>
                             </TextField>
                         </div>
                         <div>

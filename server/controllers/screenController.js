@@ -46,7 +46,7 @@ export async function getPaginatedScreens(req, res) {
 export async function getAllScreens(req, res) {
     try {
         const screens = await Screen.find();
-        return res.status(200).json(Screens);
+        return res.status(200).json(screens);
     } catch (err) {
         return res.status(400).json({
             msg: "error while fetching screens"
