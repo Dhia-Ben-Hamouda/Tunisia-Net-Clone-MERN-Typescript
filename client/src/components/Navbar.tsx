@@ -1,9 +1,14 @@
 import React from "react";
 import logo from "../images/logo.png";
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { State } from "../app/rootReducer";
 
 export default function () {
+    const profile = JSON.parse(localStorage.getItem("profile") as string);
+    const { quantity } = useSelector((state: State) => state.cart);
+
     return (
         <>
             <nav>
@@ -34,15 +39,19 @@ export default function () {
                         />
                     </div>
                     <div className="user">
-                        <Link aria-label="auth" to="/auth">
+                        {
+                            profile ? <img src={profile.picture} alt="" />  : <Link aria-label="auth" to="/auth">
                             <FaUser className="icon user" />
                         </Link>
+                        }
                     </div>
                     <div className="cart">
                         <Link aria-label="cart" to="/cart">
                             <FaShoppingCart className="icon cart-icon" />
                             <div className="num">
-                                0
+                                {
+                                    quantity
+                                }
                             </div>
                         </Link>
                     </div>

@@ -118,7 +118,14 @@ nav{
         }
 
         .user{
-            margin-left: .5rem;
+            display: flex;
+            margin-left: .25rem;
+
+            img{
+                width:40px;
+                height:40px;
+                border-radius: 50%;
+            }
         }
 
         .icon:not(.search){
@@ -130,6 +137,8 @@ nav{
         }
     }
 }
+
+
 
 // mobile devices
 

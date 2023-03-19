@@ -3,17 +3,31 @@ import { Link } from "react-router-dom";
 import hp from "../images/hp.jpg";
 import { FaStar } from "react-icons/fa";
 import { Screen } from "../../@types/types";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../app/actionCreators/cartActionCreators";
 
 export default function ({ name, id, description, pictures, price, rating }: Screen) {
+    const dispatch: any = useDispatch();
+
+    function add(){
+        dispatch(addToCart({
+            name,
+            id,
+            pictures,
+            price,
+            quantity:1
+        }))
+    }
+
     return (
         <div className="product">
             <div className="left">
-                <Link to={`/`} >
+                <Link to={`/screens/${id}`} >
                     <img src={pictures[0]} alt="" />
                 </Link>
             </div>
             <div className="right">
-                <Link to={`/`} className="name">{name}</Link>
+                <Link to={`/screens/${id}`} className="name">{name}</Link>
                 <div className="description">{description.slice(0 , 300)}...</div>
                 <div className="container">
                     <div className="wrapper">
@@ -27,7 +41,7 @@ export default function ({ name, id, description, pictures, price, rating }: Scr
                             <div className="price">{price.toFixed(3)} DT</div>
                         </div>
                     </div>
-                    <button>Add to cart</button>
+                    <button onClick={add} >Add to cart</button>
                 </div>
             </div>
         </div>

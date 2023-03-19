@@ -3,15 +3,19 @@ import { TextField } from "@mui/material";
 import { InputAdornment } from "@mui/material";
 import { FaEye, FaEyeSlash, FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { url } from "../../api/baseURL";
 import google from "../../images/socials/google.png";
 import facebook from "../../images/socials/facebook.png";
 import twitter from "../../images/socials/twitter.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../app/actionCreators/authActionCreators";
 
 export default function () {
+    const dispatch: any = useDispatch();
+    const navigate = useNavigate();
     const [signIn, setSignIn] = useState(true);
     const [hidden, setHidden] = useState(true);
     const [picture, setPicture] = useState("");
@@ -44,8 +48,6 @@ export default function () {
         });
         const data = await response.json();
 
-        console.log(data);
-
         switch (data.msg) {
             case "user with the given email doesn't exist":
                 toast.error(data.msg , {
@@ -61,6 +63,8 @@ export default function () {
                 })
                 break;
             case "logged in successfully":
+                dispatch(login(data));
+                navigate("/");
                 break;
             case "error while signing in":
                 toast.error(data.msg , {

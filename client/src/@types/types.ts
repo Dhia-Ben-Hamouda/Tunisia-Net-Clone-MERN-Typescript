@@ -55,3 +55,14 @@ export type Mouse = {
     size?:string,
     mechanical?:string
 }
+
+export type Product = {
+    _id?:string,
+    id?:string,
+    name:string,
+    description:string,
+    price:number,
+    rating:number,
+    reviews?:any[],
+    pictures:string[],
+}

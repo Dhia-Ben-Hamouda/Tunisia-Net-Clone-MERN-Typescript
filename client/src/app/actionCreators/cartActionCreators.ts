@@ -1,23 +1,23 @@
 import * as actionTypes from "../constants/cartConstants";
 
-export async function addToCart(product: any){
+export function addToCart(product: any){
     return{
         type:actionTypes.ADD_TO_CART,
         payload:product
     }
 }
 
-export async function removeFromCart(id: string){
+export function removeFromCart(id: string){
     return{
         type:actionTypes.REMOVE_FROM_CART,
         payload:id
     }
 }
 
-export async function increaseQuantity(){
+export function increaseQuantity(){
     
 }
 
-export async function decreaseQuantity(){
+export function decreaseQuantity(){
 
 }

@@ -7,6 +7,7 @@ import computerRoutes from "./routes/computerRoutes.js";
 import keyboardRoutes from "./routes/keyboardRoutes.js";
 import mouseRoutes from "./routes/mouseRoutes.js";
 import screenRoutes from "./routes/screenRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 
 const app = express();
 
@@ -43,3 +44,4 @@ app.use("/computers" , computerRoutes);
 app.use("/keyboards" , keyboardRoutes);
 app.use("/mouses" , mouseRoutes);
 app.use("/screens" , screenRoutes);
+app.use("/products" , productRoutes);
