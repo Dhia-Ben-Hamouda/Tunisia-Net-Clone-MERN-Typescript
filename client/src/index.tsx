@@ -21,6 +21,13 @@ const theme = createTheme({
                     color: "#fff"
                 }
             }
+        },
+        MuiRating:{
+            styleOverrides:{
+                iconFilled:{
+                    color:"#FCC312"
+                }
+            }
         }
     }
 })

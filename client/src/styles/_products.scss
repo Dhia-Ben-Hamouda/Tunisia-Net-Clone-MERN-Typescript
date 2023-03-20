@@ -241,3 +241,32 @@
         }
     }
 }
+
+// mobile devices
+
+@media(max-width:680px){
+    #computers{
+        .wrapper{
+            .desktop-filters{
+                display: none;
+            }
+
+            .products{
+                width:100%;
+
+                .product{
+                    flex-direction: column;
+
+                    .left{
+                        width:100%;
+                    }
+
+                    .right{
+                        width:100%;
+                    }
+
+                }
+            }
+        }
+    }
+}

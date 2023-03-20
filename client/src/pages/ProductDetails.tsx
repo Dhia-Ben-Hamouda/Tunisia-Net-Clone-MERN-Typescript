@@ -6,19 +6,21 @@ import { Product } from "../@types/types";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../app/actionCreators/cartActionCreators";
+import { Rating, TextField } from "@mui/material";
+import Review from "../components/Review";
 
 export default function () {
     const { id } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const dispatch: any = useDispatch();
 
-    function add(){
+    function add() {
         dispatch(addToCart({
-            name:product?.name,
-            id:product?._id,
-            pictures:product?.pictures,
-            price:product?.price,
-            quantity:1
+            name: product?.name,
+            id: product?._id,
+            pictures: product?.pictures,
+            price: product?.price,
+            quantity: 1
         }))
     }
 
@@ -55,13 +57,26 @@ export default function () {
                                 <FaStar className="star" />
                                 <p>( 4.8 )</p>
                             </div>
-                        <button onClick={add} >Add to cart</button>
+                            <button onClick={add} >Add to cart</button>
                         </div>
-                            <h3 className="price">{product?.price.toFixed(3)} DT</h3>
+                        <h3 className="price">{product?.price.toFixed(3)} DT</h3>
                     </div>
                 </div>
                 <div className="reviews-container">
-
+                    <h1>Product Reviews</h1>
+                    <div className="line"></div>
+                    <div className="reviews">
+                        <Review/>
+                        <Review/>
+                        <Review/>
+                    </div>
+                </div>
+                <div className="form-wrapper">
+                    <Rating value={3} size="large" color="#FCC312" />
+                    <form>
+                        <TextField className="field" label="Enter review..." />
+                        <button>Send review</button>
+                    </form>
                 </div>
             </section>
         </>
