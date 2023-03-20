@@ -22,12 +22,12 @@ export default function ({ name, id, description, pictures, price, rating }: Com
     return (
         <div className="product">
             <div className="left">
-                <Link to={`/computers/${id}`} >
+                <Link to={`/product/${id}`} >
                     <img src={pictures[0]} alt="" />
                 </Link>
             </div>
             <div className="right">
-                <Link to={`/computers/${id}`} className="name">{name}</Link>
+                <Link to={`/product/${id}`} className="name">{name}</Link>
                 <div className="description">{description.slice(0,300)}...</div>
                 <div className="container">
                     <div className="wrapper">

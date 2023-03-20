@@ -25,11 +25,19 @@ export async function getPaginatedScreens(req, res) {
         }).where("price").lte(price[1]).gte(price[0]);
 
         const numberOfPages = Math.ceil(count / limit);
-        const screens = await Screen.find({
+        let screens = await Screen.find({
             brand: { $in: brand },
             size: { $in: size },
             resolution: { $in: resolution }
-        }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price: 1 , rating: -1 });
+        }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price: 1, rating: -1 });
+
+        if (!screens.length && page === 2) {
+            screens = await Screen.find({
+                brand: { $in: brand },
+                size: { $in: size },
+                resolution: { $in: resolution }
+            }).where("price").lte(price[1]).gte(price[0]).limit(limit).sort({ price: 1, rating: -1 });
+        }
 
         return res.status(200).json({
             screens,

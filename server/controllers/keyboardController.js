@@ -25,11 +25,19 @@ export async function getPaginatedKeyboards(req, res) {
         }).where("price").lte(price[1]).gte(price[0]);
 
         const numberOfPages = Math.ceil(count / limit);
-        const keyboards = await Keyboard.find({
+        let keyboards = await Keyboard.find({
             brand: { $in: brand },
             mechanical: { $in: mechanical },
             wireless: { $in: wireless }
         }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price: 1, rating: -1 });
+
+        if (!keyboards.length && page === 2) {
+            keyboards = await Keyboard.find({
+                brand: { $in: brand },
+                mechanical: { $in: mechanical },
+                wireless: { $in: wireless }
+            }).where("price").lte(price[1]).gte(price[0]).limit(limit).sort({ price: 1, rating: -1 });
+        }
 
         return res.status(200).json({
             keyboards,

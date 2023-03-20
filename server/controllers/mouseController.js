@@ -20,10 +20,17 @@ export async function getPaginatedMouses(req, res) {
         }).where("price").lte(price[1]).gte(price[0]);
 
         const numberOfPages = Math.ceil(count / limit);
-        const mouses = await Mouse.find({
+        let mouses = await Mouse.find({
             brand: { $in: brand },
             wireless: { $in: wireless }
         }).where("price").lte(price[1]).gte(price[0]).skip(skip).limit(limit).sort({ price: 1, rating: -1 });
+
+        if(!mouses.length && page === 2){
+            mouses = await Mouse.find({
+                brand: { $in: brand },
+                wireless: { $in: wireless }
+            }).where("price").lte(price[1]).gte(price[0]).limit(limit).sort({ price: 1, rating: -1 });
+        }
 
         return res.status(200).json({
             mouses,

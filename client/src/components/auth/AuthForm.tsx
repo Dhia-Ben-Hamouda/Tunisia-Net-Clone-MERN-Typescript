@@ -99,7 +99,7 @@ export default function () {
         console.log(data);
 
         switch (data.msg) {
-            case "password has been reset successfully":
+            case "user has been created succcessfully":
                 toast.success(data.msg , {
                     autoClose: 6000,
                     pauseOnHover: false,
