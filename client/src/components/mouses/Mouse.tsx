@@ -42,6 +42,7 @@ export default function ({ name, id, description, pictures, price, rating }: Mou
                     </div>
                     <button onClick={add} >Add to cart</button>
                 </div>
+                <button onClick={add} className="mobile-btn">Add to cart</button>
             </div>
         </div>
     )

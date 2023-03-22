@@ -218,12 +218,12 @@ nav{
     .mobile-list{
         display: flex;
         justify-content: space-around;
-        padding:1rem 1rem .5rem;
+        padding:.75rem 1rem;
         
         li{
             a{
                 color:$secondary;
-                font-size: .9rem;
+                font-size: .85rem;
                 font-weight: 500;
             }
         }

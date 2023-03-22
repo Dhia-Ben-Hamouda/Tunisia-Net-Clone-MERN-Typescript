@@ -9,7 +9,6 @@ export default function(){
             <Skeleton className="skeleton" height={"228px"} />
             <Skeleton className="skeleton" height={"228px"} />
             <Skeleton className="skeleton" height={"228px"} />
-            <Skeleton className="skeleton" height={"228px"} />
         </>
     )
 }
