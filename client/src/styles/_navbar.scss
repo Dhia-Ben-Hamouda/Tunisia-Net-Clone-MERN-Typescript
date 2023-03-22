@@ -1,3 +1,57 @@
+.mobile-list{
+    display: none;
+}
+
+.search-wrapper{
+    margin-inline:1rem;
+    display: none;
+
+    .mobile-search{
+        background:white;
+        width:100% !important;
+        box-shadow: 0px 3px 4px rgba(0,0,0,0.1);
+    }
+}
+
+.search-container , .mobile-search{
+    background:white;
+    padding:.3rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    width:250px;
+
+    .circle{
+        background:$primary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:35px;
+        width:35px;
+        border-radius: 50%;
+        transition: .5s;
+        cursor: pointer;
+
+        .search{
+            color:white;
+            height:1.15rem;
+            width:1.15rem;   
+        }
+
+        &:hover{
+            transform: scale(1.25);
+        }
+    }
+
+    input{
+        border:none;
+        outline:none;
+        font-weight: 400;
+        width:70%;
+    }
+}
+
 nav{
     background: url("../images/navbar.jpg");
     background-size: 100% 100%;
@@ -52,45 +106,6 @@ nav{
         display: flex;
         align-items: center;
         gap:.25rem;
-
-        .search-container{
-            background:white;
-            padding:.3rem;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap:1rem;
-            width:250px;
-
-            .circle{
-                background:$primary;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height:35px;
-                width:35px;
-                border-radius: 50%;
-                transition: .5s;
-                cursor: pointer;
-
-                .search{
-                    color:white;
-                    height:1.15rem;
-                    width:1.15rem;   
-                }
-
-                &:hover{
-                    transform: scale(1.25);
-                }
-            }
-
-            input{
-                border:none;
-                outline:none;
-                font-weight: 500;
-                width:70%;
-            }
-        }
         
         .cart{
             position: relative;
@@ -196,6 +211,25 @@ nav{
 // mobile devices
 
 @media(max-width:680px){
+    .search-wrapper{
+        display: block;
+    }
+
+    .mobile-list{
+        display: flex;
+        justify-content: space-around;
+        padding:1rem 1rem .5rem;
+        
+        li{
+            a{
+                color:$secondary;
+                font-size: .9rem;
+                font-weight: 500;
+            }
+        }
+
+    }
+
     nav{
 
         .logo{

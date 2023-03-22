@@ -14,7 +14,12 @@
                 padding:.75rem 1.25rem;
                 border-radius: 5px;
                 cursor:pointer;
+                transition: .5s;
                 font-weight: 500;
+
+                &:hover{
+                    transform: scale(1.05);
+                }
             }
 
             .field{

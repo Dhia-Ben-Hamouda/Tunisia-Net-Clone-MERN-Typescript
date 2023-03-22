@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../images/logo.png";
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { State } from "../app/rootReducer";
 import power from "../images/power.svg";
 import user from "../images/user.svg";
@@ -13,11 +13,11 @@ export default function () {
     const { quantity } = useSelector((state: State) => state.cart);
     const navigate = useNavigate();
 
-    function toggleDropdown(){
+    function toggleDropdown() {
         document.querySelector(".dropdown")?.classList.toggle("hidden");
     }
 
-    function signOut(){
+    function signOut() {
         localStorage.clear();
         navigate("/");
     }
@@ -89,6 +89,30 @@ export default function () {
                     </div>
                 </div>
             </nav>
+            <ul className="mobile-list" >
+                <li>
+                    <Link className="mobile-link" aria-label="computers" to="/computers">Computers</Link>
+                </li>
+                <li>
+                    <Link className="mobile-link" aria-label="keyboards" to="/keyboards">Keyboards</Link>
+                </li>
+                <li>
+                    <Link className="mobile-link" aria-label="mouses" to="/mouses">Mouses</Link>
+                </li>
+                <li>
+                    <Link className="mobile-link" aria-label="screens" to="/screens">Screens</Link>
+                </li>
+            </ul>
+            <div className="search-wrapper">
+                <div className="mobile-search">
+                    <div className="circle">
+                        <FaSearch className="search" />
+                    </div>
+                    <input
+                        placeholder="search for products"
+                    />
+                </div>
+            </div>
         </>
     )
 }
