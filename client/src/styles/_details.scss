@@ -38,18 +38,22 @@
         .line{
             height:1px;
             background:rgba(85, 85, 85, 0.4);
-            margin-bottom:3rem;
+            margin-bottom:1.5rem;
         }
 
         .reviews{
-            display: flex;
-            flex-direction: column;
-            gap:1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap:1rem;
             margin-bottom: 3rem;
             
             .review{
                 display: flex;
                 gap:1.25rem;
+                background:white;
+                padding:.5rem;
+                border-radius: 5px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     
                 .wrapper{
                     display: flex;
@@ -185,3 +189,96 @@
 // *{
 //     border:1px solid;
 // }
+
+// mobile devices
+
+@media(max-width:680px){
+    #product-details{
+
+        .form-wrapper{
+            form{
+                .field{
+                    width:60%;
+                }
+
+                button{
+                    font-size: .75rem;
+                }
+            }
+        }
+
+        .reviews-container{
+            h1{
+                font-size: 1rem;
+            }
+
+            .line{
+                margin-bottom: 1.5rem;
+            }
+
+            .reviews{
+                grid-template-columns: repeat(1,1fr);
+                .review{
+                    align-items: center;
+                    padding:.5rem .25rem;
+                    gap:.75rem;
+
+                    img{
+                        width:50px;
+                        height:50px;
+                    }
+
+                    .wrapper{
+                        .top{
+                            h3{
+                                font-size: .8rem;
+                            }
+
+                            p{
+                                font-size: .7rem;
+                            }
+                        }
+
+                        .content{
+                            p{
+                                font-size: .8rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .product-container{
+            flex-direction: column;
+
+            .left{
+                width:100%;
+            }
+
+            .right{
+                width:100%;
+                gap:.25rem;
+
+                .wrapper{
+                    .stars{
+                        align-items: center;
+                        .star{
+                            height:1.25rem;
+                            width:1.25rem;
+                        }
+                    }
+                }
+
+                h1{
+                    font-size: .9rem;
+                }
+
+                p{
+                    font-size: .9rem;
+                    line-height: 1.75rem;
+                }
+            }
+        }
+    }
+}

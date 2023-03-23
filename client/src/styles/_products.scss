@@ -167,6 +167,10 @@
                     justify-content: space-around;
                     gap: .5rem;
 
+                    .mobile-btn{
+                        display: none;
+                    }
+
                     .name {
                         color: $secondary;
                         font-weight: 600;
@@ -275,6 +279,7 @@
                             border:none;
                             outline:none;
                             border-radius:5px;
+                            display: block;
                         }
 
                         .container {

@@ -5,7 +5,7 @@ export async function getPaginatedScreens(req, res) {
         let { page, brand, size, price, resolution } = JSON.parse(req.query.params);
 
         if (brand.length === 0) {
-            brand = ["HP", "Asus", "Dell", "Redragon"]
+            brand = ["HP", "Asus", "Dell", "Redragon", "LG"]
         }
 
         if (size.length === 0) {

@@ -131,6 +131,7 @@ export default function () {
                                 <MenuItem value="Asus" >Asus</MenuItem>
                                 <MenuItem value="Dell" >Dell</MenuItem>
                                 <MenuItem value="Redragon" >Redragon</MenuItem>
+                                <MenuItem value="LG" >LG</MenuItem>
                             </TextField>
                         </div>
                         <div>

@@ -66,3 +66,11 @@ export type Product = {
     reviews?:any[],
     pictures:string[],
 }
+
+export type Item = {
+    id:string,
+    name:string,
+    pictures:string[],
+    price:number,
+    quantity:number
+}

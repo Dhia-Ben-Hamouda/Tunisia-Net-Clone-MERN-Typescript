@@ -14,10 +14,16 @@ export function removeFromCart(id: string){
     }
 }
 
-export function increaseQuantity(){
-    
+export function increaseQuantity(id: string){
+    return{
+        type:actionTypes.INCREASE_QUANTITY,
+        payload:id
+    }
 }
 
-export function decreaseQuantity(){
-
+export function decreaseQuantity(id: string){
+    return{
+        type:actionTypes.DECREASE_QUANTITY,
+        payload:id
+    }
 }
