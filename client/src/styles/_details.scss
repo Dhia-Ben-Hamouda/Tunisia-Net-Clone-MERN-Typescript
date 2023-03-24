@@ -197,8 +197,9 @@
 
         .form-wrapper{
             form{
+                flex-direction: column;
                 .field{
-                    width:60%;
+                    width:100%;
                 }
 
                 button{

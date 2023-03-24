@@ -12,10 +12,11 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { login } from "../../app/actionCreators/authActionCreators";
+import { toastParams } from "../..";
 
 export default function () {
-    const dispatch: any = useDispatch();
     const navigate = useNavigate();
+    const dispatch: any = useDispatch();
     const [signIn, setSignIn] = useState(true);
     const [hidden, setHidden] = useState(true);
     const [picture, setPicture] = useState("");
@@ -34,87 +35,74 @@ export default function () {
     }
 
     async function authenticate(e: React.FormEvent) {
-        e.preventDefault();
+        try {
+            e.preventDefault();
 
-        const response = await fetch(`${url}/auth/signIn`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-        const data = await response.json();
+            const response = await fetch(`${url}/auth/signIn`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
+            const data = await response.json();
 
-        switch (data.msg) {
-            case "user with the given email doesn't exist":
-                toast.error(data.msg , {
-                    autoClose: 5000,
-                    pauseOnHover: false,
-                })
-                break;
-            case "wrong password":
-                toast.error(data.msg , {
-                    autoClose: 6000,
-                    pauseOnHover: false,
-                    pauseOnFocusLoss:false
-                })
-                break;
-            case "logged in successfully":
-                dispatch(login(data));
-                navigate("/");
-                break;
-            case "error while signing in":
-                toast.error(data.msg , {
-                    autoClose: 6000,
-                    pauseOnHover: false,
-                    pauseOnFocusLoss:false
-                })
-                break;
-            default:
-                break;
+            switch (data.msg) {
+                case "user with the given email doesn't exist":
+                    toast.error(data.msg, toastParams)
+                    break;
+                case "wrong password":
+                    toast.error(data.msg, toastParams);
+                    break;
+                case "logged in successfully":
+                    dispatch(login(data));
+                    navigate("/");
+                    break;
+                case "error while signing in":
+                    toast.error(data.msg, toastParams)
+                    break;
+                default:
+                    break;
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
     async function register(e: React.FormEvent) {
-        e.preventDefault();
+        try {
+            e.preventDefault();
 
-        const response = await fetch(`${url}/auth/signUp`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                phone,
-                picture,
-                email,
-                password
+            const response = await fetch(`${url}/auth/signUp`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    picture,
+                    email,
+                    password
+                })
             })
-        })
-        const data = await response.json();
+            const data = await response.json();
 
-        console.log(data);
-
-        switch (data.msg) {
-            case "user has been created succcessfully":
-                toast.success(data.msg , {
-                    autoClose: 6000,
-                    pauseOnHover: false,
-                    pauseOnFocusLoss:false
-                })
-                break;
-            case "error while signing up":
-                toast.error("error while signing up", {
-                    autoClose: 6000,
-                    pauseOnHover: false,
-                    pauseOnFocusLoss:false
-                })
-                break;
-            default:
-                break;
+            switch (data.msg) {
+                case "user has been created succcessfully":
+                    toast.success(data.msg, toastParams);
+                    break;
+                case "error while signing up":
+                    toast.error(data.msg, toastParams);
+                    break;
+                default:
+                    break;
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 

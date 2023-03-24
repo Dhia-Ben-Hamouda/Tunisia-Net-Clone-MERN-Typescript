@@ -22,15 +22,21 @@ const theme = createTheme({
                 }
             }
         },
-        MuiRating:{
-            styleOverrides:{
-                iconFilled:{
-                    color:"#FCC312"
+        MuiRating: {
+            styleOverrides: {
+                iconFilled: {
+                    color: "#FCC312"
                 }
             }
         }
     }
 })
+
+export const toastParams = {
+    autoClose: 6000,
+    pauseOnHover: false,
+    pauseOnFocusLoss: false
+}
 
 root.render(
     <Router>
