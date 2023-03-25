@@ -47,13 +47,13 @@ export default function ({ params, setParams }: any) {
                         <div className="price-inputs">
                             <input
                                 className="min"
-                                value={priceRange[0]}
-                                onChange={(e) => { setPriceRange([e.target.value, priceRange[1]]) }}
+                                value={priceRange[0] + " DT"}
+                                disabled
                             />
                             <input
                                 className="max"
-                                value={priceRange[1]}
-                                onChange={(e) => { setPriceRange([priceRange[0], e.target.value]) }}
+                                value={priceRange[1] + " DT"}
+                                disabled
                             />
                         </div>
                     </div>

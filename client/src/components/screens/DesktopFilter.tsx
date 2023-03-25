@@ -81,6 +81,10 @@ export default function ({ params, setParams }: any) {
                                 label="Redragon"
                             />
                             <FormControlLabel
+                                control={<Checkbox name="brand" value="Samsung" onChange={handleFilters} />}
+                                label="Samsung"
+                            />
+                            <FormControlLabel
                                 control={<Checkbox name="brand" value="Dell" onChange={handleFilters} />}
                                 label="Dell"
                             />

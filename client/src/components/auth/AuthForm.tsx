@@ -8,11 +8,9 @@ import { url } from "../../api/baseURL";
 import google from "../../images/socials/google.png";
 import facebook from "../../images/socials/facebook.png";
 import twitter from "../../images/socials/twitter.png";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { login } from "../../app/actionCreators/authActionCreators";
-import { toastParams } from "../..";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function () {
     const navigate = useNavigate();
@@ -38,6 +36,8 @@ export default function () {
         try {
             e.preventDefault();
 
+            toast.loading("signing in...", { id: "auth" , position:"bottom-center" });
+
             const response = await fetch(`${url}/auth/signIn`, {
                 method: "POST",
                 headers: {
@@ -51,22 +51,22 @@ export default function () {
             const data = await response.json();
 
             switch (data.msg) {
-                case "user with the given email doesn't exist":
-                    toast.error(data.msg, toastParams)
-                    break;
                 case "wrong password":
-                    toast.error(data.msg, toastParams);
+                    toast.error(data.msg, { id: "auth" , position:"bottom-center" });
+                    break;
+                case "user with the given email doesn't exist":
+                    toast.error("user doesn't exist", { id: "auth" , position:"bottom-center" });
+                    break;
+                case "error while signing in":
+                    toast.error(data.msg, { id: "auth" , position:"bottom-center" });
                     break;
                 case "logged in successfully":
                     dispatch(login(data));
+                    toast.success(`welcome back ${data.name}`, { id: "auth" , position:"bottom-center" });
                     navigate("/");
                     break;
-                case "error while signing in":
-                    toast.error(data.msg, toastParams)
-                    break;
-                default:
-                    break;
             }
+
         } catch (err) {
             console.error(err);
         }
@@ -93,10 +93,10 @@ export default function () {
 
             switch (data.msg) {
                 case "user has been created succcessfully":
-                    toast.success(data.msg, toastParams);
+                    toast.success(data.msg);
                     break;
                 case "error while signing up":
-                    toast.error(data.msg, toastParams);
+                    toast.error(data.msg);
                     break;
                 default:
                     break;
@@ -153,7 +153,7 @@ export default function () {
                     </> : <h3>Already have an account ? <span onClick={() => { setSignIn(!signIn) }}>Sign in</span></h3>
                 }
             </form>
-            <ToastContainer />
+            <Toaster />
         </>
     )
 }

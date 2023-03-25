@@ -32,12 +32,6 @@ const theme = createTheme({
     }
 })
 
-export const toastParams = {
-    autoClose: 6000,
-    pauseOnHover: false,
-    pauseOnFocusLoss: false
-}
-
 root.render(
     <Router>
         <ThemeProvider theme={theme}>

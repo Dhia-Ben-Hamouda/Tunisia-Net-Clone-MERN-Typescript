@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { Keyboard } from "../../@types/types";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../app/actionCreators/cartActionCreators";
+import toast , { Toaster } from "react-hot-toast";
 
 export default function ({ name, id, description, pictures, price, rating }: Keyboard) {
     const dispatch: any = useDispatch();
@@ -16,10 +17,12 @@ export default function ({ name, id, description, pictures, price, rating }: Key
             price,
             quantity:1
         }))
+        toast.success("product added to cart", { position: "bottom-center"});
     }
 
     return (
-        <div className="product">
+        <>
+            <div className="product">
             <div className="left">
                 <Link to={`/product/${id}`} >
                     <img src={pictures[0]} alt="" />
@@ -45,5 +48,7 @@ export default function ({ name, id, description, pictures, price, rating }: Key
                 <button onClick={add} className="mobile-btn">Add to cart</button>
             </div>
         </div>
+        <Toaster/>
+        </>
     )
 }

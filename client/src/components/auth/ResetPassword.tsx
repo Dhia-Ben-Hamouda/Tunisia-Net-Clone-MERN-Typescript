@@ -2,7 +2,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import { url } from "../../api/baseURL";
-import { ToastContainer, toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 
 export default function () {
@@ -26,18 +26,10 @@ export default function () {
 
         switch (data.msg) {
             case "user with the given email doesn't exist":
-                toast.error(data.msg, {
-                    autoClose: 6000,
-                    pauseOnFocusLoss: false,
-                    pauseOnHover: false
-                })
+                toast.error(data.msg)
                 break;
             case "error while resetting password":
-                toast.error(data.msg, {
-                    autoClose: 6000,
-                    pauseOnFocusLoss: false,
-                    pauseOnHover: false
-                })
+                toast.error(data.msg)
                 break;
             default:
                 break;
@@ -51,7 +43,7 @@ export default function () {
                 <TextField value={confirm} onChange={e => setConfirm(e.target.value)} label="confirm passwor..." />
                 <button>Reset password</button>
             </form>
-            <ToastContainer />
+            <Toaster />
         </>
     )
 }

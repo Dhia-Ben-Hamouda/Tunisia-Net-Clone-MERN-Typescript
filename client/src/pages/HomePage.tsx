@@ -9,6 +9,7 @@ import img5 from "../images/ads/img5.jpg";
 import img6 from "../images/ads/img6.jpg";
 import img7 from "../images/ads/img7.jpg";
 import img8 from "../images/ads/img8.jpg";
+import { Toaster } from "react-hot-toast";
 
 export default function(){
     return(
@@ -25,6 +26,7 @@ export default function(){
                 <img src={img7} alt="add card" />
                 <img src={img8} alt="add card" />
             </div>
+            <Toaster/>
         </>
     )
 }

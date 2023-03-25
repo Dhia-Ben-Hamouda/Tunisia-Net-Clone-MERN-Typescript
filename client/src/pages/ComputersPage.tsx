@@ -25,7 +25,6 @@ export default function () {
     })
 
     useEffect(()=>{
-        console.log(params);
         dispatch(fetchComputers(params));
     } , [params]);
 

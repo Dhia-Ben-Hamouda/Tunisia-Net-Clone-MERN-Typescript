@@ -18,8 +18,6 @@ export default function () {
     const dispatch: any = useDispatch();
     const { id } = useParams();
 
-    console.log(token);
-
     function add() {
         dispatch(addToCart({
             name: product?.name,
