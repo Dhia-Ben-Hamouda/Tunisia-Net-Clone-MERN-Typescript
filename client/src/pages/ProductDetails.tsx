@@ -9,6 +9,8 @@ import { addToCart } from "../app/actionCreators/cartActionCreators";
 import { Rating, TextField } from "@mui/material";
 import Review from "../components/Review";
 import { State } from "../app/rootReducer";
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function () {
     const token = localStorage.getItem("token") as string;
@@ -26,6 +28,7 @@ export default function () {
             price: product?.price,
             quantity: 1
         }))
+        toast.success("product added to cart" , {position:"bottom-center"});
     }
 
     useEffect(() => {
@@ -112,6 +115,7 @@ export default function () {
                         <button>Send review</button>
                     </form>
                 </div>
+                <Toaster/>
             </section>
         </>
     )

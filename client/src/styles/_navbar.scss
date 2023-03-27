@@ -48,6 +48,12 @@
     }
 }
 
+.search-container{
+    input{
+        font-weight: 500;
+    }
+}
+
 nav{
     background: url("../images/navbar.jpg");
     background-size: 100% 100%;
@@ -181,7 +187,7 @@ nav{
                 h3,a{
                     font-size: .8rem;
                     font-weight:600;
-                    color:black;
+                    color:$text;
                 }
             }
 

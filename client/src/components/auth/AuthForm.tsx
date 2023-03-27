@@ -37,6 +37,7 @@ export default function () {
             e.preventDefault();
 
             toast.loading("signing in...", { id: "auth" , position:"bottom-center" });
+            await new Promise(r => setTimeout(r , 500));
 
             const response = await fetch(`${url}/auth/signIn`, {
                 method: "POST",
@@ -62,7 +63,7 @@ export default function () {
                     break;
                 case "logged in successfully":
                     dispatch(login(data));
-                    toast.success(`welcome back ${data.name}`, { id: "auth" , position:"bottom-center" });
+                    toast.success(`welcome back ${data.name}`, { id: "auth" , position:"bottom-center" , duration:4000 });
                     navigate("/");
                     break;
             }
