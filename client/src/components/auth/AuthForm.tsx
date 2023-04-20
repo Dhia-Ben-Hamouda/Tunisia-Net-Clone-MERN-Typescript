@@ -5,127 +5,54 @@ import { FaEye, FaEyeSlash, FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { url } from "../../api/baseURL";
-import google from "../../images/socials/google.png";
-import facebook from "../../images/socials/facebook.png";
-import twitter from "../../images/socials/twitter.png";
+import google from "../../assets/images/socials/google.png";
+import facebook from "../../assets/images/socials/facebook.png";
+import twitter from "../../assets/images/socials/twitter.png";
 import { useDispatch } from "react-redux";
 import { login } from "../../app/actionCreators/authActionCreators";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import { AuthForm } from "../../@types/types";
 
 export default function () {
     const navigate = useNavigate();
     const dispatch: any = useDispatch();
-    const [signIn, setSignIn] = useState(true);
+    const [status, setStatus] = useState("signIn");
     const [hidden, setHidden] = useState(true);
-    const [picture, setPicture] = useState("");
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [form, setForm] = useState<AuthForm>({ name: "", phone: "", email: "", password: "", picture: null });
 
-    function fileHandler(e: any) {
-        const file = e.target.files[0];
-        const fileReader: any = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = function () {
-            setPicture(fileReader.result);
+    function fileHandler(e: React.ChangeEvent<HTMLInputElement>) {
+        if (e.target.files) {
+            setForm({ ...form, picture: e.target.files[0] });
         }
     }
 
-    async function authenticate(e: React.FormEvent) {
-        try {
-            e.preventDefault();
-
-            toast.loading("signing in...", { id: "auth" , position:"bottom-center" });
-            await new Promise(r => setTimeout(r , 500));
-
-            const response = await fetch(`${url}/auth/signIn`, {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            });
-            const data = await response.json();
-
-            switch (data.msg) {
-                case "wrong password":
-                    toast.error(data.msg, { id: "auth" , position:"bottom-center" });
-                    break;
-                case "user with the given email doesn't exist":
-                    toast.error("user doesn't exist", { id: "auth" , position:"bottom-center" });
-                    break;
-                case "error while signing in":
-                    toast.error(data.msg, { id: "auth" , position:"bottom-center" });
-                    break;
-                case "logged in successfully":
-                    dispatch(login(data));
-                    toast.success(`welcome back ${data.name}`, { id: "auth" , position:"bottom-center" , duration:4000 });
-                    navigate("/");
-                    break;
-            }
-
-        } catch (err) {
-            console.error(err);
-        }
+    function submitHandler(e: React.FormEvent) {
+        e.preventDefault();
     }
 
-    async function register(e: React.FormEvent) {
-        try {
-            e.preventDefault();
-
-            const response = await fetch(`${url}/auth/signUp`, {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    name,
-                    phone,
-                    picture,
-                    email,
-                    password
-                })
-            })
-            const data = await response.json();
-
-            switch (data.msg) {
-                case "user has been created succcessfully":
-                    toast.success(data.msg);
-                    break;
-                case "error while signing up":
-                    toast.error(data.msg);
-                    break;
-                default:
-                    break;
-            }
-        } catch (err) {
-            console.error(err);
-        }
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setForm({ ...form, [e.target.name]: e.target.value });
     }
 
     return (
         <>
-            <form onSubmit={signIn ? authenticate : register} autoComplete="off" >
+            <form onSubmit={submitHandler} autoComplete="off" >
                 {
-                    !signIn && <>
+                    status !== "signIn" && <>
                         <div className="picture-wrapper">
                             <label htmlFor="picture">
                                 {
-                                    picture ? <img src={picture} alt="profile picture" /> : <FaUserCircle className="avatar" />
+                                    form.picture ? <img src={form.picture} alt="profile picture" /> : <FaUserCircle className="avatar" />
                                 }
                             </label>
                             <input type="file" id="picture" hidden onChange={fileHandler} />
                         </div>
-                        <TextField value={name} onChange={e => setName(e.target.value)} name="name" label="enter name..." />
-                        <TextField value={phone} onChange={e => setPhone(e.target.value)} name="phone" label="enter phone..." />
+                        <TextField value={form.name} onChange={handleChange} name="name" label="enter name..." />
+                        <TextField value={form.phone} onChange={handleChange} name="phone" label="enter phone..." />
                     </>
                 }
-                <TextField value={email} onChange={e => setEmail(e.target.value)} name="email" label="enter email..." />
-                <TextField value={password} onChange={e => setPassword(e.target.value)} name="password" type={hidden ? "password" : "text"} label="enter password..." InputProps={{
+                <TextField value={form.email} onChange={handleChange} name="email" label="enter email..." />
+                <TextField value={form.password} onChange={handleChange} name="password" type={hidden ? "password" : "text"} label="enter password..." InputProps={{
                     endAdornment: <InputAdornment position="end">
                         {
                             hidden ? <FaEye onClick={() => { setHidden(!hidden) }} className="eye" /> : <FaEyeSlash onClick={() => { setHidden(!hidden) }} className="eye" />
@@ -133,12 +60,12 @@ export default function () {
                     </InputAdornment>
                 }} />
                 {
-                    signIn && <Link to="forgetPassword" >Forget password ?</Link>
+                    status === "signIn" && <Link to="forgetPassword" >Forget password ?</Link>
                 }
-                <button>{signIn ? "Sign in" : "Sign up"}</button>
+                <button>{status === "signIn" ? "Sign in" : "Sign up"}</button>
                 {
-                    signIn ? <>
-                        <h3>Don't have an account ? <span onClick={() => { setSignIn(!signIn) }}>Sign up</span></h3>
+                    status === "signIn" ? <>
+                        <h3>Don't have an account ? <span onClick={() => { setStatus("signUp") }}>Sign up</span></h3>
                         <h3 className="or" >or sign in with</h3>
                         <div className="socials-wrapper">
                             <div className="social">
@@ -151,7 +78,7 @@ export default function () {
                                 <img src={twitter} alt="twitter logo" />
                             </div>
                         </div>
-                    </> : <h3>Already have an account ? <span onClick={() => { setSignIn(!signIn) }}>Sign in</span></h3>
+                    </> : <h3>Already have an account ? <span onClick={() => { setStatus("sihnIn") }}>Sign in</span></h3>
                 }
             </form>
             <Toaster />

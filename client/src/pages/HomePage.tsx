@@ -1,14 +1,14 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Carousel from "../components/Carousel";
-import img1 from "../images/ads/img1.jpg";
-import img2 from "../images/ads/img2.jpg";
-import img3 from "../images/ads/img3.jpg";
-import img4 from "../images/ads/img4.jpg";
-import img5 from "../images/ads/img5.jpg";
-import img6 from "../images/ads/img6.jpg";
-import img7 from "../images/ads/img7.jpg";
-import img8 from "../images/ads/img8.jpg";
+import img1 from "../assets/images/ads/img1.jpg";
+import img2 from "../assets/images/ads/img2.jpg";
+import img3 from "../assets/images/ads/img3.jpg";
+import img4 from "../assets/images/ads/img4.jpg";
+import img5 from "../assets/images/ads/img5.jpg";
+import img6 from "../assets/images/ads/img6.jpg";
+import img7 from "../assets/images/ads/img7.jpg";
+import img8 from "../assets/images/ads/img8.jpg";
 import { Toaster } from "react-hot-toast";
 
 export default function(){

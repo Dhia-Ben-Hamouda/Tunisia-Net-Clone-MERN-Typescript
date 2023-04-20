@@ -74,3 +74,11 @@ export type Item = {
     price:number,
     quantity:number
 }
+
+export type AuthForm = {
+    name:string,
+    phone:string,
+    email:string,
+    password:string,
+    picture:any,
+}

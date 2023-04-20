@@ -1,5 +1,5 @@
 import React from "react";
-import hp from "../images/hp.jpg";
+import hp from "../assets/images/hp.jpg";
 import { Rating } from "@mui/material";
 
 export default function () {

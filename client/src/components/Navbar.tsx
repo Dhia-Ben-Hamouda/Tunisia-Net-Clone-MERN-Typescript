@@ -1,12 +1,12 @@
 import React from "react";
-import logo from "../images/logo.png";
+import logo from "../assets/images/logo.png";
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { State } from "../app/rootReducer";
-import power from "../images/power.svg";
-import user from "../images/user.svg";
-import settings from "../images/settings.svg";
+import power from "../assets/images/power.svg";
+import user from "../assets/images/user.svg";
+import settings from "../assets/images/settings.svg";
 
 export default function () {
     const profile = JSON.parse(localStorage.getItem("profile") as string);
