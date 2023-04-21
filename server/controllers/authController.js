@@ -21,13 +21,7 @@ export async function signIn(req, res) {
                         password,
                         phone: exist.phone,
                         id: exist._id
-                    }),
-                    name: exist.name,
-                    picture: exist.picture,
-                    email,
-                    password,
-                    phone: exist.phone,
-                    id: exist._id
+                    })
                 })
             } else {
                 return res.status(401).json({

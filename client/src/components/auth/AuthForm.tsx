@@ -1,10 +1,7 @@
-import React from "react";
-import { TextField } from "@mui/material";
-import { InputAdornment } from "@mui/material";
+import React , { useState , useRef } from "react";
+import { TextField , InputAdornment } from "@mui/material";
 import { FaEye, FaEyeSlash, FaUserCircle } from "react-icons/fa";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { url } from "../../api/baseURL";
 import google from "../../assets/images/socials/google.png";
 import facebook from "../../assets/images/socials/facebook.png";
 import twitter from "../../assets/images/socials/twitter.png";
@@ -12,13 +9,15 @@ import { useDispatch } from "react-redux";
 import { login } from "../../app/actionCreators/authActionCreators";
 import { Toaster } from 'react-hot-toast';
 import { AuthForm } from "../../@types/types";
+import { signIn, signUp } from "../../utils/auth";
 
 export default function () {
     const navigate = useNavigate();
-    const dispatch: any = useDispatch();
+    const dispatch = useDispatch();
     const [status, setStatus] = useState("signIn");
     const [hidden, setHidden] = useState(true);
     const [form, setForm] = useState<AuthForm>({ name: "", phone: "", email: "", password: "", picture: null });
+    const button = useRef<HTMLButtonElement>(null);
 
     function fileHandler(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files) {
@@ -28,6 +27,16 @@ export default function () {
 
     function submitHandler(e: React.FormEvent) {
         e.preventDefault();
+
+        if(status === "signIn"){
+            if(button.current){
+                signIn(form , navigate , dispatch);
+            }
+        }else{
+            if(button.current){
+                signUp(form);
+            }
+        }
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -62,7 +71,7 @@ export default function () {
                 {
                     status === "signIn" && <Link to="forgetPassword" >Forget password ?</Link>
                 }
-                <button>{status === "signIn" ? "Sign in" : "Sign up"}</button>
+                <button ref={button} type="submit" >{status === "signIn" ? "Sign in" : "Sign up"}</button>
                 {
                     status === "signIn" ? <>
                         <h3>Don't have an account ? <span onClick={() => { setStatus("signUp") }}>Sign up</span></h3>

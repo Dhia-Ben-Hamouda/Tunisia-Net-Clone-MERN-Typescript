@@ -1,9 +1,12 @@
-async function authenticate(e: React.FormEvent) {
-    try {
-        e.preventDefault();
+import toast from "react-hot-toast";
+import url from "../api/baseURL";
+import { AuthForm } from "../@types/types";
+import { NavigateFunction } from "react-router-dom";
+import { login } from "../app/actionCreators/authActionCreators";
 
+export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dispatch: any) {
+    try {
         toast.loading("signing in...", { id: "auth", position: "bottom-center" });
-        await new Promise(r => setTimeout(r, 500));
 
         const response = await fetch(`${url}/auth/signIn`, {
             method: "POST",
@@ -11,8 +14,8 @@ async function authenticate(e: React.FormEvent) {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                email,
-                password
+                email: authForm.email,
+                password: authForm.password
             })
         });
         const data = await response.json();
@@ -29,7 +32,7 @@ async function authenticate(e: React.FormEvent) {
                 break;
             case "logged in successfully":
                 dispatch(login(data));
-                toast.success(`welcome back ${data.name}`, { id: "auth", position: "bottom-center", duration: 4000 });
+                toast.success(`welcome back ${data.name}`, { id: "auth", position: "bottom-center"});
                 navigate("/");
                 break;
         }
@@ -39,31 +42,32 @@ async function authenticate(e: React.FormEvent) {
     }
 }
 
-async function register(e: React.FormEvent) {
+export async function signUp(authForm: AuthForm) {
     try {
-        e.preventDefault();
+        toast.loading("creating account..." , {position:"bottom-center" , id:"auth"});
+        const formData = new FormData();
+
+        formData.append("name", authForm.name);
+        formData.append("phone", authForm.phone);
+        formData.append("email", authForm.email);
+        formData.append("password", authForm.password);
+        formData.append("picture", authForm.picture);
 
         const response = await fetch(`${url}/auth/signUp`, {
             method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                phone,
-                picture,
-                email,
-                password
-            })
+            body: formData
         })
         const data = await response.json();
 
         switch (data.msg) {
             case "user has been created succcessfully":
-                toast.success(data.msg);
+                toast.success(data.msg , { position:"bottom-center" , id:"auth" });
                 break;
             case "error while signing up":
-                toast.error(data.msg);
+                toast.error(data.msg , { position:"bottom-center" , id:"auth" });
+                break;
+            case "user with the given email already exists":
+                toast.error(data.msg , { position:"bottom-center" , id:"auth" });
                 break;
             default:
                 break;
