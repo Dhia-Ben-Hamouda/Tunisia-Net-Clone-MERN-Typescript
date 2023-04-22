@@ -1,4 +1,4 @@
-import { url } from "../../api/baseURL";
+import url from "../../api/baseURL";
 import * as actionTypes from "../constants/mouseConstants";
 
 export const fetchMouses = (params: any) => async (dispatch: any) => {

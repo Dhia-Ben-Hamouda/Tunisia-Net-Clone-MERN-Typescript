@@ -82,3 +82,12 @@ export type AuthForm = {
     password:string,
     picture:any,
 }
+
+export type User = {
+    name:string,
+    phone:number,
+    email:string,
+    password:string,
+    picture:string,
+    id:string
+}

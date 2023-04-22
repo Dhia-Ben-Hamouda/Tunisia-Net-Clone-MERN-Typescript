@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { url } from "../api/baseURL";
+import url from "../api/baseURL";
 import { TextField, MenuItem } from "@mui/material";
 import { Computer } from "../@types/types";
 

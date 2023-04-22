@@ -4,7 +4,7 @@ import { AuthForm } from "../@types/types";
 import { NavigateFunction } from "react-router-dom";
 import { login } from "../app/actionCreators/authActionCreators";
 
-export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dispatch: any) {
+export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dispatch: any , button: HTMLButtonElement) {
     try {
         toast.loading("signing in...", { id: "auth", position: "bottom-center" });
 
@@ -42,7 +42,7 @@ export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dis
     }
 }
 
-export async function signUp(authForm: AuthForm) {
+export async function signUp(authForm: AuthForm , button: HTMLButtonElement) {
     try {
         toast.loading("creating account..." , {position:"bottom-center" , id:"auth"});
         const formData = new FormData();

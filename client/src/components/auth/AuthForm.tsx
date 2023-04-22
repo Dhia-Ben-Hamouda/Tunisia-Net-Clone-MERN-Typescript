@@ -1,5 +1,5 @@
-import React , { useState , useRef } from "react";
-import { TextField , InputAdornment } from "@mui/material";
+import React, { useState, useRef } from "react";
+import { TextField, InputAdornment } from "@mui/material";
 import { FaEye, FaEyeSlash, FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/images/socials/google.png";
@@ -10,6 +10,8 @@ import { login } from "../../app/actionCreators/authActionCreators";
 import { Toaster } from 'react-hot-toast';
 import { AuthForm } from "../../@types/types";
 import { signIn, signUp } from "../../utils/auth";
+import emptyObject from "../../utils/emptyObject";
+import validateForm from "../../utils/validateForm";
 
 export default function () {
     const navigate = useNavigate();
@@ -17,6 +19,7 @@ export default function () {
     const [status, setStatus] = useState("signIn");
     const [hidden, setHidden] = useState(true);
     const [form, setForm] = useState<AuthForm>({ name: "", phone: "", email: "", password: "", picture: null });
+    const [errors, setErrors] = useState({ name: "", phone: "", email: "", password: "", picture: "" });
     const button = useRef<HTMLButtonElement>(null);
 
     function fileHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -28,13 +31,22 @@ export default function () {
     function submitHandler(e: React.FormEvent) {
         e.preventDefault();
 
-        if(status === "signIn"){
-            if(button.current){
-                signIn(form , navigate , dispatch);
+        if (status === "signIn") {
+            if (button.current) {
+                if (!emptyObject(validateForm(form, "signIn"))) {
+                    setErrors(validateForm(form, "signIn"));
+                    return;
+                }
+
+                signIn(form, navigate, dispatch, button.current);
             }
-        }else{
-            if(button.current){
-                signUp(form);
+        } else {
+            if (button.current) {
+                if (!emptyObject(validateForm(form, "signUp"))) {
+                    setErrors(validateForm(form, "signUp"));
+                }
+
+                signUp(form, button.current);
             }
         }
     }

@@ -4,7 +4,6 @@ import DesktopFilter from "../components/computers/DesktopFilter";
 import Product from "../components/computers/Computer";
 import Pagination from "../components/Pagination";
 import { useEffect } from "react";
-import { url } from "../api/baseURL";
 import { Computer } from "../@types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComputers } from "../app/actionCreators/computerActionCreators";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
-import { url } from "../api/baseURL";
+import url from "../api/baseURL";
 import { Product } from "../@types/types";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,7 @@ import { addToCart } from "../app/actionCreators/cartActionCreators";
 import { Rating, TextField } from "@mui/material";
 import Review from "../components/Review";
 import { State } from "../app/rootReducer";
-import { Toaster } from "react-hot-toast";
-import toast from "react-hot-toast";
+import toast ,{ Toaster } from "react-hot-toast";
 
 export default function () {
     const token = localStorage.getItem("token") as string;
