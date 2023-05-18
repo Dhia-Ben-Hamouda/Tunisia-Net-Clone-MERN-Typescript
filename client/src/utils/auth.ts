@@ -7,6 +7,7 @@ import { login } from "../app/actionCreators/authActionCreators";
 export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dispatch: any , button: HTMLButtonElement) {
     try {
         toast.loading("signing in...", { id: "auth", position: "bottom-center" });
+        button.disabled = true;
 
         const response = await fetch(`${url}/auth/signIn`, {
             method: "POST",
@@ -19,6 +20,7 @@ export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dis
             })
         });
         const data = await response.json();
+        button.disabled = false;
 
         switch (data.msg) {
             case "wrong password":
@@ -46,6 +48,7 @@ export async function signUp(authForm: AuthForm , button: HTMLButtonElement) {
     try {
         toast.loading("creating account..." , {position:"bottom-center" , id:"auth"});
         const formData = new FormData();
+        button.disabled = true;
 
         formData.append("name", authForm.name);
         formData.append("phone", authForm.phone);
@@ -58,6 +61,7 @@ export async function signUp(authForm: AuthForm , button: HTMLButtonElement) {
             body: formData
         })
         const data = await response.json();
+        button.disabled = false;
 
         switch (data.msg) {
             case "user has been created succcessfully":

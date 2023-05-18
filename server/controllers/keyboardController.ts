@@ -1,8 +1,9 @@
-import Keyboard from "../models/Keyboard.js"
+import Keyboard from "../models/Keyboard";
+import { Request , Response } from "express";
 
-export async function getPaginatedKeyboards(req, res) {
+export async function getPaginatedKeyboards(req: Request, res: Response) {
     try {
-        let { page, brand, mechanical, wireless, price } = JSON.parse(req.query.params);
+        let { page, brand, mechanical, wireless, price } = JSON.parse(req.query.params as string);
 
         if (brand.length === 0) {
             brand = ["HP", "Asus", "Dell", "Redragon"]
@@ -51,7 +52,7 @@ export async function getPaginatedKeyboards(req, res) {
     }
 }
 
-export async function getAllkeyboards(req, res) {
+export async function getAllkeyboards(req: Request, res: Response) {
     try {
         const keyboards = await Keyboard.find();
         return res.status(200).json(keyboards);
@@ -62,7 +63,7 @@ export async function getAllkeyboards(req, res) {
     }
 }
 
-export async function getkeyboard(req, res) {
+export async function getkeyboard(req: Request, res: Response) {
     try {
         const { id } = req.params;
 
@@ -75,7 +76,7 @@ export async function getkeyboard(req, res) {
     }
 }
 
-export async function insertkeyboard(req, res) {
+export async function insertkeyboard(req: Request, res: Response) {
     try {
         const { name, description, price, pictures, brand, mechanical, wireless } = req.body;
         await Keyboard.create({ name, description, price, pictures, brand, mechanical, wireless });
@@ -90,7 +91,7 @@ export async function insertkeyboard(req, res) {
     }
 }
 
-export async function deletekeyboard(req, res) {
+export async function deletekeyboard(req: Request, res: Response) {
     try {
         const { id } = req.params;
         await Keyboard.findByIdAndDelete(id);
@@ -105,7 +106,7 @@ export async function deletekeyboard(req, res) {
     }
 }
 
-export async function updatekeyboard(req, res) {
+export async function updatekeyboard(req: Request, res: Response) {
     try {
         const { id } = req.params;
         await Keyboard.findByIdAndUpdate(id, req.body);

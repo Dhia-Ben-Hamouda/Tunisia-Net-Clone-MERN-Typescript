@@ -1,8 +1,9 @@
-import Mouse from "../models/Mouse.js";
+import Mouse from "../models/Mouse";
+import { Request , Response } from "express";
 
-export async function getPaginatedMouses(req, res) {
+export async function getPaginatedMouses(req: Request, res:Response) {
     try {
-        let { page, brand, wireless, price } = JSON.parse(req.query.params);
+        let { page, brand, wireless, price } = JSON.parse(req.query.params as string);
 
         if (brand.length === 0) {
             brand = ["HP", "Asus", "Dell", "Redragon"]
@@ -44,7 +45,7 @@ export async function getPaginatedMouses(req, res) {
     }
 }
 
-export async function getAllMouses(req, res) {
+export async function getAllMouses(req: Request, res: Response) {
     try {
         const mouses = await Mouse.find();
         return res.status(200).json(mouses);
@@ -55,7 +56,7 @@ export async function getAllMouses(req, res) {
     }
 }
 
-export async function getMouse(req, res) {
+export async function getMouse(req: Request, res: Response) {
     try {
         const { id } = req.params;
 
@@ -68,7 +69,7 @@ export async function getMouse(req, res) {
     }
 }
 
-export async function insertMouse(req, res) {
+export async function insertMouse(req: Request, res: Response) {
     try {
         const { name, description, price, pictures, brand, wireless } = req.body;
         await Mouse.create({ name, description, price, pictures, brand, wireless });
@@ -83,7 +84,7 @@ export async function insertMouse(req, res) {
     }
 }
 
-export async function deleteMouse(req, res) {
+export async function deleteMouse(req: Request, res: Response) {
     try {
         const { id } = req.params;
         await Mouse.findByIdAndDelete(id);
@@ -98,7 +99,7 @@ export async function deleteMouse(req, res) {
     }
 }
 
-export async function updateMouse(req, res) {
+export async function updateMouse(req: Request, res: Response) {
     try {
         const { id } = req.params;
         await Mouse.findByIdAndUpdate(id, req.body);

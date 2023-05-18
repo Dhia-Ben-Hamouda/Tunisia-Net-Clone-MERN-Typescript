@@ -1,8 +1,9 @@
-import Screen from "../models/Screen.js";
+import Screen from "../models/Screen";
+import { Request, Response } from "express";
 
-export async function getPaginatedScreens(req, res) {
+export async function getPaginatedScreens(req: Request, res: Response) {
     try {
-        let { page, brand, size, price, resolution } = JSON.parse(req.query.params);
+        let { page, brand, size, price, resolution } = JSON.parse(req.query.params as string);
 
         if (brand.length === 0) {
             brand = ["HP", "Asus", "Dell", "Redragon", "LG", "Samsung"];
@@ -51,7 +52,7 @@ export async function getPaginatedScreens(req, res) {
     }
 }
 
-export async function getAllScreens(req, res) {
+export async function getAllScreens(req: Request, res: Response) {
     try {
         const screens = await Screen.find();
         return res.status(200).json(screens);
@@ -62,7 +63,7 @@ export async function getAllScreens(req, res) {
     }
 }
 
-export async function getScreen(req, res) {
+export async function getScreen(req: Request, res: Response) {
     try {
         const { id } = req.params;
 
@@ -75,7 +76,7 @@ export async function getScreen(req, res) {
     }
 }
 
-export async function insertScreen(req, res) {
+export async function insertScreen(req: Request, res: Response) {
     try {
         const { name, description, price, pictures, brand, size, resolution } = req.body;
         await Screen.create({ name, description, price, pictures, brand, size, resolution });
@@ -90,7 +91,7 @@ export async function insertScreen(req, res) {
     }
 }
 
-export async function deleteScreen(req, res) {
+export async function deleteScreen(req: Request, res: Response) {
     try {
         const { id } = req.params;
         await Screen.findByIdAndDelete(id);
@@ -105,7 +106,7 @@ export async function deleteScreen(req, res) {
     }
 }
 
-export async function updateScreen(req, res) {
+export async function updateScreen(req: Request, res: Response) {
     try {
         const { name, description, price, pictures, brand, size, resolution } = req.body;
         const { id } = req.params;

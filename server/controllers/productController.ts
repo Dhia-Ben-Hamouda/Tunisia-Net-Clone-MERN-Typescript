@@ -1,9 +1,10 @@
-import Computer from "../models/Computer.js"
-import Keyboard from "../models/Keyboard.js"
-import Screen from "../models/Screen.js"
-import Mouse from "../models/Mouse.js"
+import Computer from "../models/Computer";
+import Keyboard from "../models/Keyboard";
+import Screen from "../models/Screen";
+import Mouse from "../models/Mouse";
+import { Request, Response } from "express";
 
-export async function getProduct(req, res) {
+export async function getProduct(req: Request, res: Response) {
     try {
         const { id } = req.params;
 

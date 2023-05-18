@@ -1,8 +1,9 @@
-import Computer from "../models/Computer.js";
+import Computer from "../models/Computer";
+import { Request , Response } from "express";
 
-export async function getPaginatedComputers(req, res) {
+export async function getPaginatedComputers(req: Request, res: Response) {
     try {
-        let { page, brand, procesor, graphicsCard, memory, storage, price } = JSON.parse(req.query.params);
+        let { page, brand, procesor, graphicsCard, memory, storage, price } = JSON.parse(req.query.params as string);
 
         if (brand.length === 0) {
             brand = ["HP", "Asus", "Dell"]
@@ -65,7 +66,7 @@ export async function getPaginatedComputers(req, res) {
     }
 }
 
-export async function getAllComputers(req, res) {
+export async function getAllComputers(req: Request, res: Response) {
     try {
         const computers = await Computer.find();
         return res.status(200).json(computers);
@@ -76,7 +77,7 @@ export async function getAllComputers(req, res) {
     }
 }
 
-export async function getComputer(req, res) {
+export async function getComputer(req: Request, res: Response) {
     try {
         const { id } = req.params;
 
@@ -89,7 +90,7 @@ export async function getComputer(req, res) {
     }
 }
 
-export async function insertComputer(req, res) {
+export async function insertComputer(req: Request, res: Response) {
     try {
         const { name, description, price, pictures, brand, procesor, memory, storage, graphicsCard } = req.body;
         await Computer.create({ name, description, price, pictures, brand, procesor, memory, storage, graphicsCard });
@@ -104,7 +105,7 @@ export async function insertComputer(req, res) {
     }
 }
 
-export async function deleteComputer(req, res) {
+export async function deleteComputer(req: Request, res: Response) {
     try {
         const { id } = req.params;
         await Computer.findByIdAndDelete(id);
@@ -119,7 +120,7 @@ export async function deleteComputer(req, res) {
     }
 }
 
-export async function updateComputer(req, res) {
+export async function updateComputer(req: Request, res: Response) {
     try {
         const { name, description, price, pictures, brand, procesor, memory, storage, graphicsCard } = req.body;
         const { id } = req.params;

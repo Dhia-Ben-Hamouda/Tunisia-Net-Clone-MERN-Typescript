@@ -1,9 +1,10 @@
+import { Request , Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
-import User from "../models/User.js";
+import User from "../models/User";
 
-export async function signIn(req, res) {
+export async function signIn(req: Request, res: Response) {
     try {
         const { email, password } = req.body;
         const exist = await User.findOne({ email });
@@ -14,7 +15,7 @@ export async function signIn(req, res) {
             if (match) {
                 return res.status(200).json({
                     msg: "logged in successfully",
-                    token: generateToken({
+                    token: generateAccessToken({
                         name: exist.name,
                         picture: exist.picture,
                         email,
@@ -40,7 +41,7 @@ export async function signIn(req, res) {
     }
 }
 
-export async function signUp(req, res) {
+export async function signUp(req: Request, res: Response) {
     try {
         const { name, phone, email, password, picture } = req.body;
 
@@ -73,7 +74,7 @@ export async function signUp(req, res) {
     }
 }
 
-export async function forgetPassword(req, res) {
+export async function forgetPassword(req: Request, res: Response) {
     try {
         const { email } = req.body;
         const exist = await User.findOne({ email });
@@ -121,7 +122,7 @@ export async function forgetPassword(req, res) {
     }
 }
 
-export async function resetPassword(req, res) {
+export async function resetPassword(req: Request, res: Response) {
     try {
         const { password } = req.body;
         const { id } = req.params;
@@ -141,6 +142,10 @@ export async function resetPassword(req, res) {
     }
 }
 
-function generateToken(payload) {
-    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
+function generateAccessToken(payload: any) {
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET as string, { expiresIn: "15m" });
+}
+
+function generateRefreshToken(payload: any) {
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET as string);
 }

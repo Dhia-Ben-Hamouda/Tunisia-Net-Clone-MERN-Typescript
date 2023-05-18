@@ -2,13 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoutes from "./routes/authRoutes.js";
-import computerRoutes from "./routes/computerRoutes.js";
-import keyboardRoutes from "./routes/keyboardRoutes.js";
-import mouseRoutes from "./routes/mouseRoutes.js";
-import screenRoutes from "./routes/screenRoutes.js";
-import productRoutes from "./routes/productRoutes.js";
-import reviewRoutes from "./routes/reviewRoutes.js";
+import authRoutes from "./routes/authRoutes";
+import computerRoutes from "./routes/computerRoutes";
+import keyboardRoutes from "./routes/keyboardRoutes";
+import mouseRoutes from "./routes/mouseRoutes";
+import screenRoutes from "./routes/screenRoutes";
+import productRoutes from "./routes/productRoutes";
+import reviewRoutes from "./routes/reviewRoutes";
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(cors({
 // env variables
 
 const port = process.env.PORT || 5000;
-const url = process.env.URL;
+const url = process.env.URL as string;
 
 // connecting to mongoDB
 
