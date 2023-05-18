@@ -1,7 +1,7 @@
 import express from "express";
-import { getAllComputers, getPaginatedComputers , insertComputer } from "../controllers/computerController.js";
-import { deleteComputer , updateComputer } from "../controllers/computerController.js";
-import { getComputer } from "../controllers/computerController.js";
+import { getAllComputers, getPaginatedComputers , insertComputer } from "../controllers/computerController";
+import { deleteComputer , updateComputer } from "../controllers/computerController";
+import { getComputer } from "../controllers/computerController";
 
 const router = express.Router();
 router.use(express.json());

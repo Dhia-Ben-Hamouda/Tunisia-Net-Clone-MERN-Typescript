@@ -1,6 +1,6 @@
 import express from "express";
-import { forgetPassword, resetPassword, signIn, signUp } from "../controllers/authController.js";
-import upload from "../middleware/uploadMiddleware.js";
+import { forgetPassword, resetPassword, signIn, signUp } from "../controllers/authController";
+import upload from "../middleware/uploadMiddleware";
 
 const router = express.Router();
 router.use(express.json());

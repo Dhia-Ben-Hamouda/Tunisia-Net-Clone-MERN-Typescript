@@ -1,6 +1,6 @@
 import express from "express";
-import { deleteScreen, getAllScreens, getPaginatedScreens } from "../controllers/screenController.js";
-import { getScreen, insertScreen, updateScreen } from "../controllers/screenController.js";
+import { deleteScreen, getAllScreens, getPaginatedScreens } from "../controllers/screenController";
+import { getScreen, insertScreen, updateScreen } from "../controllers/screenController";
 
 const router = express.Router();
 router.use(express.json());

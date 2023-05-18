@@ -1,5 +1,5 @@
-import { MyRequest } from "../@types/types.js";
-import Review from "../models/Review.js";
+import { MyRequest } from "../@types/types";
+import Review from "../models/Review";
 import { Response } from "express";
 
 export async function insertReview(req: MyRequest, res: Response) {

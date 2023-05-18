@@ -1,6 +1,6 @@
 import express from "express";
-import { deleteMouse, getAllMouses, getMouse } from "../controllers/mouseController.js";
-import { getPaginatedMouses, insertMouse, updateMouse } from "../controllers/mouseController.js";
+import { deleteMouse, getAllMouses, getMouse } from "../controllers/mouseController";
+import { getPaginatedMouses, insertMouse, updateMouse } from "../controllers/mouseController";
 
 const router = express.Router();
 router.use(express.json());
