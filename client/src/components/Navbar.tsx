@@ -63,7 +63,7 @@ export default function () {
                     </div>
                     {
                         profile ? <div className="avatar" onClick={toggleDropdown} >
-                            <img src={`${url}/images/users/${profile.picture}`} alt="avatar" />
+                            <img src={`${url}/images/${profile?.picture}`} alt="avatar" />
                             <div className="dropdown hidden">
                                 <div className="orders">
                                     <img src={user} alt="" />

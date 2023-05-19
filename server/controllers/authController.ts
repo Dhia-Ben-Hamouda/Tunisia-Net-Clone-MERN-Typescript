@@ -55,7 +55,7 @@ export async function signUp(req: Request, res: Response) {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         if (req.file) {
-            const imageName = Date.now() + "-" + req.file.originalname;
+            const imageName = "users/" + Date.now() + "-" + req.file.originalname;
             const imagePath = "uploads/images/users/" + imageName;
 
             await sharp(req.file.buffer).toFile(imagePath);
