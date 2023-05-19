@@ -1,5 +1,6 @@
-import { Request , Response } from "express";
+import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import sharp from "sharp";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import User from "../models/User";
@@ -9,32 +10,30 @@ export async function signIn(req: Request, res: Response) {
         const { email, password } = req.body;
         const exist = await User.findOne({ email });
 
-        if (exist) {
-            const match = await bcrypt.compare(password, exist.password);
-
-            if (match) {
-                return res.status(200).json({
-                    msg: "logged in successfully",
-                    token: generateAccessToken({
-                        name: exist.name,
-                        picture: exist.picture,
-                        email,
-                        password,
-                        phone: exist.phone,
-                        id: exist._id
-                    })
-                })
-            } else {
-                return res.status(401).json({
-                    msg: "wrong password"
-                })
-            }
-        } else {
+        if (!exist) {
             return res.status(404).json({
                 msg: "user with the given email doesn't exist"
             })
         }
+
+        const match = await bcrypt.compare(password, exist.password);
+
+        if (!match) {
+            return res.status(401).json({
+                msg: "wrong password"
+            })
+        }
+
+        const accessToken = generateAccessToken({ name: exist.name, picture: exist.picture, email, password, phone: exist.phone, id: exist._id });
+        const refreshToken = generateRefreshToken({ name: exist.name, picture: exist.picture, email, password, phone: exist.phone, id: exist._id });
+
+        return res.status(200).cookie("refreshToken", refreshToken, { httpOnly: true }).json({
+            msg: "logged in successfully",
+            token: accessToken
+        })
+
     } catch (err) {
+        console.log(err);
         return res.status(400).json({
             msg: "error while signing in"
         })
@@ -43,30 +42,44 @@ export async function signIn(req: Request, res: Response) {
 
 export async function signUp(req: Request, res: Response) {
     try {
-        const { name, phone, email, password, picture } = req.body;
-
+        const { name, phone, email, password } = req.body;
         const exist = await User.findOne({ email });
 
         if (exist) {
             return res.status(400).json({
                 msg: "user with the given email already exists"
             })
-        } else {
-            const salt = await bcrypt.genSalt();
-            const hashedPassword = await bcrypt.hash(password, salt);
+        }
+
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        if (req.file) {
+            const imageName = Date.now() + "-" + req.file.originalname;
+            const imagePath = "uploads/images/users/" + imageName;
+
+            await sharp(req.file.buffer).toFile(imagePath);
 
             await User.create({
                 name,
                 phone,
                 email,
                 password: hashedPassword,
-                picture
-            })
-
-            return res.status(200).json({
-                msg: "user has been created succcessfully"
-            })
+                picture: imageName
+            });
+        } else {
+            await User.create({
+                name,
+                phone,
+                email,
+                password: hashedPassword
+            });
         }
+
+        return res.status(200).json({
+            msg: "user has been created succcessfully"
+        })
+
     } catch (err) {
         return res.status(400).json({
             msg: "error while signing up"
@@ -105,11 +118,11 @@ export async function forgetPassword(req: Request, res: Response) {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 return res.status(200).json({
-                    msg:"error while sending password reset email"
+                    msg: "error while sending password reset email"
                 })
             } else {
                 return res.status(200).json({
-                    msg:"a password reset link has been sent to your email"
+                    msg: "a password reset link has been sent to your email"
                 })
             }
         });
@@ -128,12 +141,12 @@ export async function resetPassword(req: Request, res: Response) {
         const { id } = req.params;
 
         const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(password , salt);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        await User.findByIdAndUpdate(id , { password: hashedPassword });
+        await User.findByIdAndUpdate(id, { password: hashedPassword });
 
         return res.status(200).json({
-            msg:"password has been reset successfully"
+            msg: "password has been reset successfully"
         })
     } catch (err) {
         return res.status(400).json({

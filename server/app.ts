@@ -15,6 +15,7 @@ const app = express();
 // middleware
 
 app.use(express.json({limit:"1mb"}));
+app.use(express.static("uploads"));
 mongoose.set('strictQuery', false);
 dotenv.config();
 app.use(cors({
