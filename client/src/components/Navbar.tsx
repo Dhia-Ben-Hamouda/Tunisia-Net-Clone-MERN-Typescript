@@ -1,24 +1,27 @@
 import React from "react";
 import logo from "../assets/images/logo.png";
 import { FaUser, FaShoppingCart, FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { State } from "../app/rootReducer";
 import power from "../assets/images/power.svg";
 import user from "../assets/images/user.svg";
 import settings from "../assets/images/settings.svg";
+import url from "../api/baseURL";
+import { signOut } from "../app/actionCreators/authActionCreators";
 
 export default function () {
-    const profile = JSON.parse(localStorage.getItem("profile") as string);
+    const profile = useSelector((state: State) => state.auth.user);
     const { quantity } = useSelector((state: State) => state.cart);
+    const dispatch: any = useDispatch();
     const navigate = useNavigate();
 
     function toggleDropdown() {
         document.querySelector(".dropdown")?.classList.toggle("hidden");
     }
 
-    function signOut() {
-        localStorage.clear();
+    function signOutHandler() {
+        dispatch(signOut());
         navigate("/");
     }
 
@@ -60,7 +63,7 @@ export default function () {
                     </div>
                     {
                         profile ? <div className="avatar" onClick={toggleDropdown} >
-                            <img src={profile.picture} alt="avatar" />
+                            <img src={`${url}/images/users/${profile.picture}`} alt="avatar" />
                             <div className="dropdown hidden">
                                 <div className="orders">
                                     <img src={user} alt="" />
@@ -70,7 +73,7 @@ export default function () {
                                     <img src={settings} alt="" />
                                     <Link to="/" >Settings</Link>
                                 </div>
-                                <div className="sign-out" onClick={signOut} >
+                                <div className="sign-out" onClick={signOutHandler} >
                                     <img src={power} alt="" />
                                     <h3>Sign out</h3>
                                 </div>

@@ -5,6 +5,7 @@ export default function(){
     return(
         <>
             <Navbar />
+            <h1>Orders Page</h1>
         </>
     )
 }

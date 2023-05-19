@@ -3,8 +3,9 @@ import url from "../api/baseURL";
 import { AuthForm } from "../@types/types";
 import { NavigateFunction } from "react-router-dom";
 import { login } from "../app/actionCreators/authActionCreators";
+import decode from "jwt-decode";
 
-export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dispatch: any , button: HTMLButtonElement) {
+export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dispatch: any, button: HTMLButtonElement) {
     try {
         toast.loading("signing in...", { id: "auth", position: "bottom-center" });
         button.disabled = true;
@@ -22,19 +23,24 @@ export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dis
         const data = await response.json();
         button.disabled = false;
 
+        console.log(data);
+
         switch (data.msg) {
             case "wrong password":
-                toast.error(data.msg, { id: "auth", position: "bottom-center" });
+                toast.error(data.msg, { id: "auth" });
                 break;
             case "user with the given email doesn't exist":
-                toast.error("user doesn't exist", { id: "auth", position: "bottom-center" });
+                toast.error("user doesn't exist", { id: "auth" });
                 break;
             case "error while signing in":
-                toast.error(data.msg, { id: "auth", position: "bottom-center" });
+                toast.error(data.msg, { id: "auth" });
                 break;
             case "logged in successfully":
-                dispatch(login(data));
-                toast.success(`welcome back ${data.name}`, { id: "auth", position: "bottom-center"});
+                const token = data.token;
+                const user = decode(data.token) as any;
+
+                dispatch(login({ user, token }));
+                toast.success(`welcome back ${user.name}`, { id: "auth" });
                 navigate("/");
                 break;
         }
@@ -44,9 +50,9 @@ export async function signIn(authForm: AuthForm, navigate: NavigateFunction, dis
     }
 }
 
-export async function signUp(authForm: AuthForm , button: HTMLButtonElement) {
+export async function signUp(authForm: AuthForm, button: HTMLButtonElement) {
     try {
-        toast.loading("creating account..." , {position:"bottom-center" , id:"auth"});
+        toast.loading("creating account...", { position: "bottom-center", id: "auth" });
         const formData = new FormData();
         button.disabled = true;
 
@@ -65,13 +71,13 @@ export async function signUp(authForm: AuthForm , button: HTMLButtonElement) {
 
         switch (data.msg) {
             case "user has been created succcessfully":
-                toast.success(data.msg , { position:"bottom-center" , id:"auth" });
+                toast.success(data.msg, { id: "auth" });
                 break;
             case "error while signing up":
-                toast.error(data.msg , { position:"bottom-center" , id:"auth" });
+                toast.error(data.msg, { id: "auth" });
                 break;
             case "user with the given email already exists":
-                toast.error(data.msg , { position:"bottom-center" , id:"auth" });
+                toast.error(data.msg, { id: "auth" });
                 break;
             default:
                 break;

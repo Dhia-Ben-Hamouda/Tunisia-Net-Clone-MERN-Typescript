@@ -31,9 +31,9 @@ export default function () {
                 <Route path="/screens" element={<ScreensPage />} />
                 <Route path="/mouses" element={<MousesPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/product/:id" element={<ProductDetails/>} />
-                <Route path="/orders" element={ <OrdersPage/> } />
-                <Route path="/settings" element={ <SettingsPage/> } />
+                <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/orders" element={<OrdersPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
             </Routes>
         </>
     )

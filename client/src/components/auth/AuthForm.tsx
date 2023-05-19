@@ -1,12 +1,11 @@
 import React, { useState, useRef } from "react";
 import { TextField, InputAdornment } from "@mui/material";
-import { FaEye, FaEyeSlash, FaUserCircle } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/images/socials/google.png";
 import facebook from "../../assets/images/socials/facebook.png";
 import twitter from "../../assets/images/socials/twitter.png";
 import { useDispatch } from "react-redux";
-import { login } from "../../app/actionCreators/authActionCreators";
 import { Toaster } from 'react-hot-toast';
 import { AuthForm } from "../../@types/types";
 import { signIn, signUp } from "../../utils/auth";
@@ -44,6 +43,7 @@ export default function () {
             if (button.current) {
                 if (!emptyObject(validateForm(form, "signUp"))) {
                     setErrors(validateForm(form, "signUp"));
+                    return;
                 }
 
                 signUp(form, button.current);
@@ -60,20 +60,12 @@ export default function () {
             <form onSubmit={submitHandler} autoComplete="off" >
                 {
                     status !== "signIn" && <>
-                        <div className="picture-wrapper">
-                            <label htmlFor="picture">
-                                {
-                                    form.picture ? <img src={form.picture} alt="profile picture" /> : <FaUserCircle className="avatar" />
-                                }
-                            </label>
-                            <input type="file" id="picture" hidden onChange={fileHandler} />
-                        </div>
-                        <TextField value={form.name} onChange={handleChange} name="name" label="enter name..." />
-                        <TextField value={form.phone} onChange={handleChange} name="phone" label="enter phone..." />
+                        <TextField helperText={errors.name} error={!!errors.name} value={form.name} onChange={handleChange} name="name" label="enter name..." />
+                        <TextField helperText={errors.phone} error={!!errors.phone} value={form.phone} onChange={handleChange} name="phone" label="enter phone..." />
                     </>
                 }
-                <TextField value={form.email} onChange={handleChange} name="email" label="enter email..." />
-                <TextField value={form.password} onChange={handleChange} name="password" type={hidden ? "password" : "text"} label="enter password..." InputProps={{
+                <TextField helperText={errors.email} error={!!errors.email} value={form.email} onChange={handleChange} name="email" label="enter email..." />
+                <TextField helperText={errors.password} error={!!errors.password} value={form.password} onChange={handleChange} name="password" type={hidden ? "password" : "text"} label="enter password..." InputProps={{
                     endAdornment: <InputAdornment position="end">
                         {
                             hidden ? <FaEye onClick={() => { setHidden(!hidden) }} className="eye" /> : <FaEyeSlash onClick={() => { setHidden(!hidden) }} className="eye" />
@@ -81,7 +73,7 @@ export default function () {
                     </InputAdornment>
                 }} />
                 {
-                    status === "signIn" && <Link to="forgetPassword" >Forget password ?</Link>
+                    status === "signIn" ? <Link to="forgetPassword" >Forget password ?</Link> : <input type="file" id="picture" onChange={fileHandler} />
                 }
                 <button ref={button} type="submit" >{status === "signIn" ? "Sign in" : "Sign up"}</button>
                 {
@@ -99,7 +91,7 @@ export default function () {
                                 <img src={twitter} alt="twitter logo" />
                             </div>
                         </div>
-                    </> : <h3>Already have an account ? <span onClick={() => { setStatus("sihnIn") }}>Sign in</span></h3>
+                    </> : <h3>Already have an account ? <span onClick={() => { setStatus("signIn") }}>Sign in</span></h3>
                 }
             </form>
             <Toaster />

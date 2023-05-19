@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { useState } from "react";
-import { url } from "../../api/baseURL";
+import url from "../../api/baseURL";
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function () {

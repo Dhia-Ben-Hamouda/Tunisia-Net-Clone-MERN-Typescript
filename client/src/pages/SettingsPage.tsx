@@ -5,6 +5,7 @@ export default function(){
     return(
         <>
             <Navbar/>
+            <h1>Settings Page</h1>
         </>
     )
 }
