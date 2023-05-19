@@ -76,7 +76,7 @@ export default function () {
                                 products.length !== 0 && products.map(({ name, pictures, price, _id } , index) => {
                                     if(index < 3){
                                         return (
-                                            <div className="product">
+                                            <div key={_id} className="product">
                                                 <Link className="img-container" to={`/product/${_id}`} >
                                                     <img src={pictures[0]} alt="product" />
                                                 </Link>

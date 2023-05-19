@@ -30,7 +30,7 @@ export default function ({ name, id, description, pictures, price, rating }: Key
             </div>
             <div className="right">
                 <Link to={`/product/${id}`} className="name">{name}</Link>
-                <div className="description">{description.slice(0 , 300)}...</div>
+                <p className="description">{description.slice(0 , 300)}...</p>
                 <div className="container">
                     <div className="wrapper">
                         <div className="stars">
