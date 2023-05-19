@@ -49,10 +49,54 @@
 }
 
 .search-container{
+    position: relative;
+
     input{
         font-weight: 500;
     }
+
+    .products-container{
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        position: absolute;
+        right:0px;
+        top:45px;
+        border-radius: 15px;
+        box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+        overflow: hidden;
+
+        .product{
+            display: flex;
+            gap:.5rem;
+            background:white;
+            padding:1rem;
+
+            .img-container{
+                width:50%;
+
+                img{
+                    width:100%;
+                }
+            }
+
+            .text-wrap{
+                a{
+                    font-size: .75rem !important;
+                    color:$secondary;
+                    font-weight: 500;
+                }
+
+                p{
+                    color:red;
+                    font-weight: 500;
+                    font-size: .8rem;
+                }
+            }
+        }
+    }
 }
+
 
 nav{
     background: url("../assets/images/navbar.jpg");
